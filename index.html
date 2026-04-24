@@ -9,7 +9,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -26,10 +26,10 @@
         }
     </script>
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #F9F6F0; color: #2D2D2D; overflow-x: hidden; }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #F9F6F0; color: #2D2D2D; overflow-x: hidden; }
         
         .brand-name { 
-            font-family: 'Noto Naskh Arabic', serif; 
+            font-family: 'Lalezar', cursive; 
             background: linear-gradient(135deg, #8E6F3E 0%, #C5A059 50%, #8E6F3E 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -81,8 +81,10 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #F3EFE7; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
         
-        .book-content h2 { color: #8E6F3E; font-family: 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 1.6rem; margin-top: 2rem; border-right: 4px solid #C5A059; padding-right: 12px; }
-        .book-content p { line-height: 2; margin-bottom: 1.2rem; text-align: justify; color: #4A4A4A; }
+        .book-content h2 { color: #8E6F3E; font-family: 'Vazirmatn', sans-serif; font-weight: 900; font-size: 1.5rem; margin-top: 2rem; border-right: 4px solid #C5A059; padding-right: 12px; margin-bottom: 1rem; }
+        .book-content h3 { color: #C5A059; font-weight: 700; margin-top: 1.5rem; }
+        .book-content p { line-height: 1.8; margin-bottom: 1.2rem; text-align: justify; color: #4A4A4A; font-size: 0.95rem; }
+        .book-content ul { list-style: circle; padding-right: 20px; margin-bottom: 1rem; color: #555; }
     </style>
 </head>
 <body class="antialiased">
@@ -106,7 +108,7 @@
                 <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-gold/10">
                     <i data-lucide="shield-check" class="text-gold w-8 h-8"></i>
                 </div>
-                <h2 class="text-5xl font-black brand-name mb-2">رِكاز</h2>
+                <h2 class="text-6xl font-black brand-name mb-2">رِكاز</h2>
                 <p id="auth-subtitle" class="text-gray-400 text-xs font-medium tracking-[0.1em]">عالم من المعرفة الراقية</p>
             </div>
 
@@ -157,7 +159,7 @@
                     <p class="text-[9px] text-gold font-black uppercase tracking-tighter">Elite Member</p>
                 </div>
             </div>
-            <h1 class="brand-name text-2xl font-bold md:block hidden">رِكاز</h1>
+            <h1 class="brand-name text-3xl font-bold md:block hidden">رِكاز</h1>
             <button onclick="logoutMaki()" class="p-3 bg-red-50 text-red-400 rounded-xl hover:bg-red-100 transition-all"><i data-lucide="log-out" class="w-5 h-5"></i></button>
         </header>
 
@@ -178,13 +180,33 @@
                 <div class="glass-panel p-10 rounded-[2.5rem]">
                     <div class="flex items-center gap-4 mb-8">
                         <i data-lucide="library" class="text-gold w-8 h-8"></i>
-                        <h2 class="text-3xl font-bold brand-name">مكتبة الفقه</h2>
+                        <h2 class="text-4xl font-bold brand-name">منهج الفقه المالكي - 2 ثانوي</h2>
                     </div>
                     <div class="book-content custom-scrollbar h-[550px] overflow-y-auto px-4">
-                        <h2>باب البيوع</h2>
-                        <p>البيع لغة: مقابلة شيء بشيء. واصطلاحاً: عقد معاوضة على غير منافع ولا متعة لذة، ذو مكايسة.</p>
+                        <h2>كتاب البيوع</h2>
+                        <p><strong>البيع لغة:</strong> مقابلة شيء بشيء. <strong>واصطلاحاً:</strong> عقد معاوضة على غير منافع ولا متعة لذة، ذو مكايسة.</p>
+                        <h3>أركان البيع:</h3>
+                        <ul>
+                            <li>العاقدان (البائع والمشتري).</li>
+                            <li>المعقود عليه (الثمن والمثمن).</li>
+                            <li>الصيغة (الإيجاب والقبول).</li>
+                        </ul>
+
+                        <h2>باب الخيار</h2>
+                        <p>الخيار هو طلب خير الأمرين من إمضاء البيع أو رده. وهو نوعان عند المالكية: خيار تروٍّ (شرط) وخيار نقيصة (عيب).</p>
+
                         <h2>باب الربا</h2>
-                        <p>الربا لغة: الزيادة. وهو قسمان: ربا الفضل وربا النساء. والقاعدة: "كل ما يقتات ويدخر يجري فيه الربا".</p>
+                        <p>الربا محرم قطعاً. والقاعدة في المذهب المالكي: "كل ما يقتات ويدخر يجري فيه الربا"، وينقسم لربا الفضل وربا النساء.</p>
+
+                        <h2>باب السلم</h2>
+                        <p>السلم هو بيع موصوف في الذمة ببدل يعجل قبضه في مجلس العقد. وهو مستثنى من بيع ما ليس عندك للحاجة إليه.</p>
+
+                        <h2>باب القرض</h2>
+                        <p>دفع مال لمن ينتفع به ويرد مثله تبرعاً. ويحرم فيه كل شرط جر نفعاً للمقرض.</p>
+
+                        <h2>أحكام النكاح</h2>
+                        <p>عقد يفيد ملك متعة بآدمي غير محرم ولا مجوسي ولا أمة كتابية. أركانه: الولي، الصداق، المحل، الصيغة.</p>
+
                         <div class="mt-12 p-8 bg-gold/5 rounded-2xl text-center border border-gold/10">
                             <p class="text-gold font-bold italic">رِكاز .. فخرُ العلمِ والعملِ</p>
                         </div>
@@ -194,18 +216,20 @@
         </main>
 
         <div id="gemini-chat-window" class="fixed bottom-32 left-6 right-6 md:left-auto md:right-12 md:w-[360px] z-[300]">
-            <div class="glass-panel p-6 rounded-[2.5rem] h-[480px] flex flex-col border-gold/20">
-                <div class="flex items-center justify-between mb-4">
+            <div class="glass-panel p-6 rounded-[2.5rem] h-[480px] flex flex-col border-gold/20 shadow-2xl">
+                <div class="flex items-center justify-between mb-4 border-b border-gold/10 pb-2">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 bg-gold rounded-full animate-ping"></span>
-                        <span class="font-black text-gold text-sm">ذكاء رِكاز</span>
+                        <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                        <span class="font-black text-gray-700 text-sm italic">Gemini Advanced</span>
                     </div>
-                    <button onclick="toggleGemini()"><i data-lucide="chevron-down" class="text-gray-400"></i></button>
+                    <button onclick="toggleGemini()"><i data-lucide="x-circle" class="text-gray-400 w-5 h-5"></i></button>
                 </div>
                 <div id="chat-content" class="flex-1 overflow-y-auto custom-scrollbar space-y-4 mb-4 text-xs pr-2 text-gray-600 font-medium"></div>
                 <div class="relative">
-                    <input type="text" id="gemini-input" placeholder="اسأل وسنجيبك..." class="w-full bg-white border border-gold/10 p-4 rounded-2xl outline-none focus:border-gold/40 text-gray-600">
-                    <button onclick="sendToGemini()" class="absolute left-2 top-2 bg-gold p-2 rounded-xl text-white transition-transform active:scale-90"><i data-lucide="sparkles" class="w-4 h-4"></i></button>
+                    <input type="text" id="gemini-input" placeholder="اسأل وسنجيبك فوراً..." class="w-full bg-white border border-gold/10 p-4 rounded-2xl outline-none focus:border-royal text-gray-700 transition-all shadow-inner">
+                    <button onclick="sendToGemini()" class="absolute left-2 top-2 bg-gradient-to-tr from-gold to-royal p-2 rounded-xl text-white transition-transform active:scale-90 shadow-md">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -214,10 +238,10 @@
             <button onclick="showSection('home')" id="nav-home" class="text-gold transition-all"><i data-lucide="layout-grid"></i></button>
             <button onclick="showSection('books')" id="nav-books" class="text-gray-300 transition-all"><i data-lucide="book-marked"></i></button>
             <button onclick="toggleGemini()" class="w-14 h-14 bg-gradient-to-b from-gold to-royal rounded-2xl flex items-center justify-center text-white shadow-lg -mt-10 border-4 border-pearl transition-transform hover:scale-105">
-                <i data-lucide="wand-2"></i>
+                <i data-lucide="zap"></i>
             </button>
-            <button class="text-gray-300"><i data-lucide="medal"></i></button>
-            <button onclick="openProfileEdit()" class="text-gray-300"><i data-lucide="settings"></i></button>
+            <button class="text-gray-300"><i data-lucide="scroll-text"></i></button>
+            <button onclick="openProfileEdit()" class="text-gray-300"><i data-lucide="user-cog"></i></button>
         </nav>
     </div>
 
@@ -243,14 +267,14 @@
         let authMode = 'login';
         let currentUser = null;
 
-        const aiResponses = {
-            "سلام": "وعليكم السلام ورحمة الله وبركاته، أهلاً بك في رِكاز.",
-            "مرحبا": "مرحباً بك يا مبدع، كيف يمكنني مساعدتك اليوم؟",
-            "فقه": "الفقه هو العلم بالأحكام الشرعية العملية، هل تريد شرحاً لباب معين؟",
-            "بيع": "البيع عقد معاوضة، وأهم أركانه الرضا والمحل والصيغة.",
-            "ربا": "الربا محرم شرعاً، وهو زيادة في أشياء مخصوصة، احذر منه في تعاملاتك.",
-            "ركاز": "رِكاز هي منصتك الملكية للتميز العلمي والفكري.",
-            "شكرا": "العفو، نحن دائماً في خدمتك لتحقيق أفضل النتائج."
+        // منطق ردود الذكاء الاصطناعي (Gemini Simulation)
+        const geminiLogic = (query) => {
+            query = query.toLowerCase();
+            if (query.includes("بيع")) return "البيع في الفقه المالكي هو عقد معاوضة على غير منافع. هل تريد معرفة أركانه؟";
+            if (query.includes("ربا")) return "الربا نوعان: ربا الفضل (زيادة في القدر) وربا النساء (تأخير القبض). وكلاهما محرم.";
+            if (query.includes("نكاح") || query.includes("زواج")) return "النكاح في مذهبنا يشترط فيه الولي والصداق والمحل والصيغة. هل تبحث عن تفاصيل الولي؟";
+            if (query.includes("رِكاز")) return "رِكاز هي منصة تعليمية فاخرة صممها Ab Maki لتسهيل العلوم الشرعية.";
+            return "بصفتي Gemini، أنا هنا لمساعدتك في فهم دروس الفقه المالكي المقررة عليك. اسألني عن أي باب من الأبواب المذكورة في المكتبة.";
         };
 
         function showSection(sectionId) {
@@ -330,7 +354,7 @@
                         <img src="${p.avatar}" class="w-10 h-10 rounded-xl object-cover border border-gold/10">
                         <div><h5 class="font-bold text-gray-700 text-xs">${p.author}</h5><p class="text-[9px] text-gray-400">${p.time}</p></div>
                     </div>
-                    <p class="text-xs text-gray-600 leading-relaxed">${p.content}</p>
+                    <p class="text-xs text-gray-600 leading-relaxed font-bold">${p.content}</p>
                 </div>
             `).join('');
         }
@@ -364,25 +388,22 @@
         function toggleGemini() { document.getElementById('gemini-chat-window').classList.toggle('active'); }
 
         function initGemini() {
-            document.getElementById('chat-content').innerHTML = `<div class="bg-gold/10 p-4 rounded-2xl mb-2 text-gold">مرحباً ${currentUser.name}، أنا ذكاء رِكاز المساعد. اسألني عن الفقه أو عن المنصة.</div>`;
+            document.getElementById('chat-content').innerHTML = `<div class="bg-blue-50 p-4 rounded-2xl mb-2 text-blue-600 border border-blue-100">مرحباً ${currentUser.name}، أنا Gemini المساعد الذكي لرِكاز. كيف يمكنني تبسيط مادة الفقه لك اليوم؟</div>`;
         }
 
         function sendToGemini() {
             const input = document.getElementById('gemini-input');
-            const val = input.value.trim().toLowerCase();
+            const val = input.value.trim();
             if(!val) return;
             const content = document.getElementById('chat-content');
             
-            content.innerHTML += `<div class="text-left py-2 px-4 bg-gray-100 rounded-xl mb-4 ml-8">${input.value}</div>`;
+            content.innerHTML += `<div class="text-left py-2 px-4 bg-gray-100 rounded-xl mb-4 ml-8 text-[10px] font-black">${val}</div>`;
             input.value = "";
             content.scrollTop = content.scrollHeight;
 
             setTimeout(() => {
-                let response = "عذراً، لم أفهم استفسارك بدقة. هل يمكنك توضيح ما تطلبه بخصوص مكتبة رِكاز؟";
-                for (let key in aiResponses) {
-                    if (val.includes(key)) { response = aiResponses[key]; break; }
-                }
-                content.innerHTML += `<div class="bg-gold/5 p-4 rounded-2xl mb-4 mr-8 border-r-4 border-gold text-gray-700">${response}</div>`;
+                let response = geminiLogic(val);
+                content.innerHTML += `<div class="bg-gradient-to-r from-blue-50 to-white p-4 rounded-2xl mb-4 mr-8 border-r-4 border-blue-400 text-gray-700 shadow-sm">${response}</div>`;
                 content.scrollTop = content.scrollHeight;
             }, 800);
         }

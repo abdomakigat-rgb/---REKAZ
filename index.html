@@ -328,7 +328,7 @@
             setTimeout(() => {
                 app.style.opacity = '1';
                 lucide.createIcons();
-                initGemini(userName); // تشغيل جيميناي
+                initGemini(userName); // تشغيل جيميناي المطور
             }, 100);
         }
 
@@ -352,7 +352,7 @@
             chatContent.innerHTML = `
                 <div class="flex justify-end opacity-0 translate-y-4 animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-forwards">
                     <div class="bg-white/5 p-4 rounded-2xl text-xs border border-white/10 text-gray-300 max-w-[85%] shadow-sm leading-relaxed">
-                        أهلاً بك يا بطل **${name}**! معك مساعد جيميناي المطور خصيصاً لمنصة رِكاز. كيف يمكنني دعمك في رحلتك الدراسية اليوم؟ 🚀
+                        أهلاً بك يا بطل **${name}**! أنا جيميناي، رفيقك في منصة رِكاز. هل نبدأ بمراجعة دروسك أم لديك سؤال محدد اليوم؟ 🚀
                     </div>
                 </div>
             `;
@@ -361,24 +361,23 @@
         async function sendToGemini() {
             const input = document.getElementById('gemini-input');
             const chatContent = document.getElementById('chat-content');
-            const sendBtn = document.getElementById('send-btn');
             
             if (input.value.trim() === "") return;
 
             const userMsg = input.value;
             input.value = "";
 
-            // رسالة المستخدم بتصميم راقي
+            // رسالة المستخدم
             chatContent.innerHTML += `
                 <div class="flex justify-start">
-                    <div class="bg-gold/10 p-4 rounded-2xl text-xs text-gold border border-gold/20 max-w-[85%] shadow-sm animate-pulse-once">
+                    <div class="bg-gold/10 p-4 rounded-2xl text-xs text-gold border border-gold/20 max-w-[85%] shadow-sm">
                         ${userMsg}
                     </div>
                 </div>
             `;
             chatContent.scrollTop = chatContent.scrollHeight;
 
-            // إظهار تأثير "جاري التفكير"
+            // إظهار نقاط التفكير
             const typingId = "typing-" + Date.now();
             chatContent.innerHTML += `
                 <div id="${typingId}" class="flex justify-end">
@@ -391,17 +390,23 @@
             `;
             chatContent.scrollTop = chatContent.scrollHeight;
 
-            // محاكاة استجابة ذكية (Logic)
+            // محاكاة استجابة منطقية ومطورة
             setTimeout(() => {
                 document.getElementById(typingId).remove();
                 
                 let response = "";
                 const msg = userMsg.toLowerCase();
                 
-                if(msg.includes("سلام") || msg.includes("هلا")) response = "وعليكم السلام يا بطل! مستعد للمذاكرة؟";
-                else if(msg.includes("مذاكرة") || msg.includes("جدول")) response = "التنظيم هو مفتاح النجاح. جرب تقنية 'البومودورو': 25 دقيقة تركيز و5 دقائق راحة. هل تريدني أن أساعدك في تقسيم مادة معينة؟";
-                else if(msg.includes("شكرا") || msg.includes("شكراً")) response = "العفو يا مكي! دائماً في خدمتك وخدمة طلاب رِكاز.";
-                else response = `لقد استلمت طلبك بخصوص "${userMsg}". بصفتي مساعدك الذكي في رِكاز، أنصحك بمراجعة خزانة الكتب أولاً ثم البدء بالتطبيق العملي. هل هناك جزء محدد في المنهج يصعب عليك؟`;
+                // منطق ردود ذكي مبسط
+                if(msg.includes("سلام") || msg.includes("هلا")) {
+                    response = "وعليكم السلام يا رفيق النجاح! كيف حال همتك اليوم؟";
+                } else if(msg.includes("مذاكرة") || msg.includes("تعبت")) {
+                    response = "تذكر أن رِكاز بُنيت للأبطال مثلك. خذ استراحة 5 دقائق وتنفس بعمق، ثم عد بقوة. أنا هنا لشرح أي نقطة صعبة!";
+                } else if(msg.includes("شكرا") || msg.includes("عاش")) {
+                    response = "في الخدمة دائماً! نحن فريق واحد نحو القمة.";
+                } else {
+                    response = `بناءً على نظام رِكاز 2026، سؤالك حول "${userMsg}" مهم جداً. أنصحك بالاطلاع على خزانة الكتب أولاً، وإذا لم تجد الإجابة، سأقوم بتحليلها لك بالتفصيل. هل نبدأ؟`;
+                }
 
                 chatContent.innerHTML += `
                     <div class="flex justify-end">
@@ -412,7 +417,7 @@
                 `;
                 chatContent.scrollTop = chatContent.scrollHeight;
                 lucide.createIcons();
-            }, 1500);
+            }, 1200);
         }
 
         window.addEventListener('load', () => {

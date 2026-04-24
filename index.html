@@ -42,6 +42,9 @@
         @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
         
         .hidden-section { display: none; }
+        .book-content h2 { color: #D4AF37; font-weight: 900; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; border-right: 4px solid #D4AF37; padding-right: 10px; }
+        .book-content h3 { color: #B8860B; font-weight: 700; font-size: 1.2rem; margin-top: 1.5rem; }
+        .book-content p { line-height: 1.8; margin-bottom: 1rem; text-align: justify; }
     </style>
 </head>
 <body class="overflow-x-hidden antialiased">
@@ -116,18 +119,53 @@
 
         <main class="max-w-4xl mx-auto p-6 pb-32 space-y-12">
             
-            <section id="feed" class="space-y-6">
-                <div class="glass-panel p-6 rounded-3xl">
-                    <h4 class="text-xl font-black mb-4 brand-name">شارك أفكارك في رِكاز</h4>
-                    <textarea id="post-input" placeholder="ماذا يدور في ذهنك اليوم؟" class="w-full bg-black/20 border border-white/5 p-4 rounded-2xl outline-none focus:border-gold/50 resize-none h-24 text-sm"></textarea>
-                    <div class="flex justify-end mt-2">
-                        <button onclick="createPost()" class="px-8 py-2 bg-gold text-black rounded-xl font-bold text-sm shadow-lg">نشر</button>
+            <div id="section-home" class="space-y-12">
+                <section id="feed" class="space-y-6">
+                    <div class="glass-panel p-6 rounded-3xl">
+                        <h4 class="text-xl font-black mb-4 brand-name">شارك أفكارك في رِكاز</h4>
+                        <textarea id="post-input" placeholder="ماذا يدور في ذهنك اليوم؟" class="w-full bg-black/20 border border-white/5 p-4 rounded-2xl outline-none focus:border-gold/50 resize-none h-24 text-sm"></textarea>
+                        <div class="flex justify-end mt-2">
+                            <button onclick="createPost()" class="px-8 py-2 bg-gold text-black rounded-xl font-bold text-sm shadow-lg">نشر</button>
+                        </div>
+                    </div>
+                    <div id="posts-container" class="space-y-6"></div>
+                </section>
+            </div>
+
+            <div id="section-books" class="hidden space-y-8 animate-in fade-in duration-500">
+                <div class="glass-panel p-8 rounded-[2rem] border-gold/20">
+                    <div class="flex items-center gap-4 mb-8">
+                        <i data-lucide="book-open" class="text-gold w-10 h-10"></i>
+                        <h2 class="text-3xl font-black brand-name">كتاب الفقه المالكي - 2 ثانوي</h2>
+                    </div>
+                    
+                    <div class="book-content custom-scrollbar h-[600px] overflow-y-auto px-4 text-gray-300">
+                        <h2>باب البيوع</h2>
+                        <p>البيع لغة: مقابلة شيء بشيء. واصطلاحاً: عقد معاوضة على غير منافع ولا متعة لذة، ذو مكايسة، أحد عوضيه غير ذهب ولا فضة معين غير عين فيهما.</p>
+                        <h3>أركان البيع</h3>
+                        <p>أركان البيع ثلاثة: عاقد (بائع ومشترٍ)، ومعقود عليه (ثمن ومثمن)، وصيغة (إيجاب وقبول).</p>
+                        
+                        <h2>باب الربا</h2>
+                        <p>الربا لغة: الزيادة. وهو قسمان: ربا الفضل وربا النساء. ربا الفضل هو الزيادة في أحد المتساويين جنساً، وربا النساء هو التأخير في قبض أحد العوضين.</p>
+                        <p>القاعدة في المذهب المالكي: "كل ما يقتات ويدخر يجري فيه الربا".</p>
+
+                        <h2>باب السلم</h2>
+                        <p>السلم: هو بيع موصوف في الذمة ببدل يعجل ظرف العقد. ويسمى أيضاً "بيع المحاويج" لأنه رخصة للمحتاجين للثمن قبل نضج الثمار.</p>
+                        <h3>شروط السلم</h3>
+                        <p>يُشترط في السلم ما يُشترط في البيع، بالإضافة إلى: تعجيل الثمن، كون المسلم فيه ديناً موصوفاً، بيان الأجل، وأن يكون المسلم فيه مما ينضبط بالوصف.</p>
+
+                        <h2>باب الرهن</h2>
+                        <p>الرهن: هو جعل عين متمولة وثيقة في دين يُستوفى منها أو من ثمنها عند تعذر الوفاء. وفائدته طمأنة الدائن على حقه.</p>
+                        
+                        <h2>باب الوكالة</h2>
+                        <p>الوكالة: هي تفويض شخص لآخر ما يفعله مما يقبل النيابة. وتصح في كل حق آدمي من عقود وفسوخ وقبض حقوق.</p>
+
+                        <div class="mt-10 p-6 bg-gold/5 rounded-2xl border border-gold/20">
+                            <p class="text-center font-bold text-gold italic">"تم بحمد الله.. رِكاز رفيقك في النجاح"</p>
+                        </div>
                     </div>
                 </div>
-
-                <div id="posts-container" class="space-y-6">
-                    </div>
-            </section>
+            </div>
         </main>
 
         <div id="gemini-chat-window" class="fixed bottom-32 left-6 right-6 md:left-auto md:right-12 md:w-[380px] z-[300]">
@@ -148,8 +186,8 @@
         </div>
 
         <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md h-20 bg-black/80 backdrop-blur-2xl rounded-full border border-white/10 flex justify-around items-center z-[200] shadow-2xl">
-            <button class="text-gold"><i data-lucide="home"></i></button>
-            <button class="text-gray-500"><i data-lucide="book-open"></i></button>
+            <button onclick="showSection('home')" id="nav-home" class="text-gold transition-all"><i data-lucide="home"></i></button>
+            <button onclick="showSection('books')" id="nav-books" class="text-gray-500 transition-all"><i data-lucide="book-open"></i></button>
             <button onclick="toggleGemini()" class="w-14 h-14 bg-gold rounded-2xl flex items-center justify-center text-black shadow-lg -mt-10 border-4 border-dark">
                 <i data-lucide="sparkles"></i>
             </button>
@@ -183,12 +221,20 @@
         let authMode = 'login';
         let currentUser = null;
 
-        // نظام التحقق
+        function showSection(sectionId) {
+            document.getElementById('section-home').classList.add('hidden');
+            document.getElementById('section-books').classList.add('hidden');
+            document.getElementById('section-' + sectionId).classList.remove('hidden');
+            
+            document.getElementById('nav-home').className = sectionId === 'home' ? 'text-gold' : 'text-gray-500';
+            document.getElementById('nav-books').className = sectionId === 'books' ? 'text-gold' : 'text-gray-500';
+        }
+
         function toggleAuthMode(mode) {
             authMode = mode;
             document.getElementById('signup-fields').style.display = mode === 'signup' ? 'block' : 'none';
-            document.getElementById('btn-login-tab').className = mode === 'login' ? 'flex-1 py-3 rounded-xl font-bold text-sm transition-all bg-gold text-black' : 'flex-1 py-3 rounded-xl font-bold text-sm transition-all text-gray-500';
-            document.getElementById('btn-signup-tab').className = mode === 'signup' ? 'flex-1 py-3 rounded-xl font-bold text-sm transition-all bg-gold text-black' : 'flex-1 py-3 rounded-xl font-bold text-sm transition-all text-gray-500';
+            document.getElementById('btn-login-tab').className = mode === 'login' ? 'flex-1 py-3 rounded-xl font-bold text-sm bg-gold text-black' : 'flex-1 py-3 rounded-xl font-bold text-sm text-gray-500';
+            document.getElementById('btn-signup-tab').className = mode === 'signup' ? 'flex-1 py-3 rounded-xl font-bold text-sm bg-gold text-black' : 'flex-1 py-3 rounded-xl font-bold text-sm text-gray-500';
             document.getElementById('auth-subtitle').innerText = mode === 'login' ? 'سجل دخولك لمنصة رِكاز' : 'أنشئ حسابك الملكي في رِكاز';
         }
 
@@ -207,27 +253,23 @@
         function handleAuth() {
             const user = document.getElementById('auth-user').value;
             const pass = document.getElementById('auth-pass').value;
-            
-            if(!user || !pass) return alert("امسح البيانات يا بطل");
+            if(!user || !pass) return alert("أكمل البيانات يا بطل");
 
             if(authMode === 'signup') {
                 const userData = {
-                    name: user,
-                    pass: pass,
+                    name: user, pass: pass,
                     pfp: document.getElementById('pfp-preview').src || `https://ui-avatars.com/api/?name=${user}&background=D4AF37&color=000`
                 };
                 localStorage.setItem(`rekaz_user_${user}`, JSON.stringify(userData));
-                alert("تم إنشاء حسابك في رِكاز بنجاح! سجل دخولك الآن.");
+                alert("تم إنشاء حسابك في رِكاز! سجل دخولك الآن.");
                 toggleAuthMode('login');
             } else {
                 const stored = localStorage.getItem(`rekaz_user_${user}`);
                 if(stored) {
                     const parsed = JSON.parse(stored);
-                    if(parsed.pass === pass) {
-                        currentUser = parsed;
-                        loginToApp();
-                    } else alert("كلمة السر غلط!");
-                } else alert("الحساب مش موجود!");
+                    if(parsed.pass === pass) { currentUser = parsed; loginToApp(); }
+                    else alert("كلمة السر خاطئة!");
+                } else alert("الحساب غير موجود!");
             }
         }
 
@@ -242,19 +284,11 @@
             loadPosts();
         }
 
-        // نظام المنشورات
         function createPost() {
             const text = document.getElementById('post-input').value;
             if(!text) return;
-            const post = {
-                id: Date.now(),
-                author: currentUser.name,
-                avatar: currentUser.pfp,
-                content: text,
-                time: "الآن"
-            };
             const posts = JSON.parse(localStorage.getItem('rekaz_posts') || '[]');
-            posts.unshift(post);
+            posts.unshift({ author: currentUser.name, avatar: currentUser.pfp, content: text, time: "الآن" });
             localStorage.setItem('rekaz_posts', JSON.stringify(posts));
             document.getElementById('post-input').value = "";
             loadPosts();
@@ -267,26 +301,20 @@
                 <div class="glass-panel p-6 rounded-3xl animate-in slide-in-from-bottom-4 duration-500">
                     <div class="flex items-center gap-3 mb-4">
                         <img src="${p.avatar}" class="w-10 h-10 rounded-full object-cover border border-gold/30">
-                        <div>
-                            <h5 class="font-bold text-white text-sm">${p.author}</h5>
-                            <p class="text-[10px] text-gray-500">${p.time}</p>
-                        </div>
+                        <div><h5 class="font-bold text-white text-sm">${p.author}</h5><p class="text-[10px] text-gray-500">${p.time}</p></div>
                     </div>
-                    <p class="text-sm leading-relaxed text-gray-300">${p.content}</p>
+                    <p class="text-sm text-gray-300">${p.content}</p>
                 </div>
             `).join('');
         }
 
-        // تعديل البروفايل
         function openProfileEdit() {
             document.getElementById('profile-modal').style.display = 'flex';
             document.getElementById('edit-pfp-preview').src = currentUser.pfp;
             document.getElementById('edit-name-input').value = currentUser.name;
         }
 
-        function closeProfileEdit() {
-            document.getElementById('profile-modal').style.display = 'none';
-        }
+        function closeProfileEdit() { document.getElementById('profile-modal').style.display = 'none'; }
 
         function updateProfilePFP(input) {
             if (input.files && input.files[0]) {
@@ -297,35 +325,29 @@
         }
 
         function saveProfileChanges() {
-            const newName = document.getElementById('edit-name-input').value;
-            const newPfp = document.getElementById('edit-pfp-preview').src;
-            
-            // تحديث البيانات
-            const oldName = currentUser.name;
-            currentUser.name = newName;
-            currentUser.pfp = newPfp;
-            
-            localStorage.setItem(`rekaz_user_${newName}`, JSON.stringify(currentUser));
-            document.getElementById('user-name-display').innerText = newName;
-            document.getElementById('user-avatar').src = newPfp;
+            currentUser.name = document.getElementById('edit-name-input').value;
+            currentUser.pfp = document.getElementById('edit-pfp-preview').src;
+            localStorage.setItem(`rekaz_user_${currentUser.name}`, JSON.stringify(currentUser));
+            document.getElementById('user-name-display').innerText = currentUser.name;
+            document.getElementById('user-avatar').src = currentUser.pfp;
             closeProfileEdit();
-            loadPosts(); // لتحديث الصور في المنشورات
+            loadPosts();
         }
 
         function toggleGemini() { document.getElementById('gemini-chat-window').classList.toggle('active'); }
 
         function initGemini() {
-            document.getElementById('chat-content').innerHTML = `<div class="bg-white/5 p-3 rounded-xl border border-white/5">أهلاً بك في رِكاز يا ${currentUser.name}! كيف يمكنني خدمتك اليوم؟</div>`;
+            document.getElementById('chat-content').innerHTML = `<div class="bg-white/5 p-3 rounded-xl">أهلاً بك في رِكاز! أنا هنا لمساعدتك في مذاكرة الفقه المالكي.</div>`;
         }
 
         function sendToGemini() {
             const input = document.getElementById('gemini-input');
             if(!input.value) return;
             const content = document.getElementById('chat-content');
-            content.innerHTML += `<div class="text-gold text-right ml-8 mb-2">● ${input.value}</div>`;
+            content.innerHTML += `<div class="text-gold text-right mb-2">${input.value}</div>`;
             input.value = "";
             setTimeout(() => {
-                content.innerHTML += `<div class="bg-white/5 p-3 rounded-xl border border-white/5 mb-4">بناءً على ذكاء رِكاز، نحن هنا لدعمك. استمر في المذاكرة!</div>`;
+                content.innerHTML += `<div class="bg-white/5 p-3 rounded-xl mb-4">وفقك الله في دراسة الفقه. "رِكاز" دائماً معك.</div>`;
                 content.scrollTop = content.scrollHeight;
             }, 1000);
         }

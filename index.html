@@ -1,279 +1,279 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>رِكاز | REKAZ 2026</title>
+    <meta name="author" content="Ab Maki Experiments">
+    <meta name="theme-color" content="#050505">
+    <title>NEO-REKAZ 2026 | المنصة التعليمية الكبرى</title>
     
-    <meta name="theme-color" content="#D4AF37">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root { --gold: #D4AF37; --dark: #0A0A0A; }
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            background-color: var(--dark); 
-            color: white; 
-            -webkit-tap-highlight-color: transparent;
-            user-select: none; /* حماية المحتوى من النسخ */
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        royal: '#B8860B',
+                        dark: '#050505',
+                    }
+                }
+            }
         }
-
-        /* تأثيرات مكي الملكية */
-        .maki-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #F9F4E8 50%, #B8860B 100%);
+    </script>
+    <style>
+        /* ستايل إضافي لمساعد جيميناي الذكي */
+        #gemini-chat-window {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0) translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #gemini-chat-window.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        .gemini-gradient {
+            background: linear-gradient(135deg, #4285f4, #9b72cb, #d96570);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 2rem;
-        }
-
-        .btn-maki {
-            background: linear-gradient(90deg, #B8860B, #D4AF37);
-            color: black;
-            font-weight: 900;
-            transition: 0.4s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .btn-maki:active { transform: scale(0.95); }
-
-        /* أنيميشن الدخول */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .reveal { animation: fadeInUp 0.8s forwards; }
-
-        /* إخفاء السكرول بار */
-        ::-webkit-scrollbar { width: 0px; }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="bg-dark text-gray-200 font-['Cairo'] overflow-x-hidden antialiased">
 
-    <div id="auth-screen" class="fixed inset-0 z-[100] bg-black flex items-center justify-center p-6">
-        <div class="glass-panel w-full max-w-md p-10 text-center reveal relative overflow-hidden">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-gold/10 blur-3xl rounded-full"></div>
-            
-            <h1 class="text-6xl font-black maki-gradient mb-2">رِكاز</h1>
-            <p class="text-gray-500 text-xs tracking-widest mb-8 font-bold">نظام مكي التعليمي 2026</p>
-
-            <div id="auth-tabs" class="flex bg-white/5 p-1 rounded-2xl mb-6">
-                <button onclick="toggleAuth('login')" id="btn-login" class="flex-1 py-3 rounded-xl font-bold transition-all bg-gold text-black">دخول</button>
-                <button onclick="toggleAuth('signup')" id="btn-signup" class="flex-1 py-3 rounded-xl font-bold transition-all text-gray-400">حساب جديد</button>
+    <div id="splash-screen" class="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center transition-all duration-1000">
+        <div class="relative mb-8">
+            <h1 class="text-9xl font-black brand-name opacity-20 blur-xl absolute inset-0">رِكاز</h1>
+            <h1 class="text-8xl font-black brand-name relative z-10 animate-pulse">رِكاز</h1>
+        </div>
+        <div class="flex flex-col items-center">
+            <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden mb-4">
+                <div id="progress-bar" class="w-0 h-full bg-gold shadow-[0_0_15px_#D4AF37] transition-all duration-700"></div>
             </div>
-
-            <div class="space-y-4" id="auth-inputs">
-                </div>
-
-            <button onclick="handleAuth()" class="w-full btn-maki py-4 mt-8 rounded-2xl flex items-center justify-center gap-3 shadow-lg shadow-gold/20">
-                <span id="auth-action-text">دخول النادي الملكي</span>
-                <i data-lucide="shield-check"></i>
-            </button>
+            <p id="splash-text" class="text-gold text-[10px] font-bold tracking-[0.4em] uppercase">Initializing Maki OS...</p>
         </div>
     </div>
 
-    <div id="app-content" class="hidden opacity-0 transition-opacity duration-1000">
+    <section id="auth-gate" class="min-h-screen flex items-center justify-center p-4 relative z-50 overflow-hidden bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent">
+        <div class="glass-panel w-full max-w-lg p-10 md:p-16 rounded-[3.5rem] relative z-10 border-t border-white/10">
+            <div class="text-center mb-12">
+                <div class="inline-flex p-5 rounded-3xl bg-gold/5 mb-6 border border-gold/20 shadow-2xl">
+                    <i data-lucide="crown" class="text-gold w-12 h-12"></i>
+                </div>
+                <h2 class="text-5xl font-black brand-name mb-4 leading-tight">النادي الملكي</h2>
+                <p class="text-gray-500 text-sm font-medium">مرحباً بك في النسخة المطورة من "رِكاز 2026"</p>
+            </div>
+
+            <div class="flex bg-black/40 p-1.5 rounded-[2rem] border border-white/5 mb-10">
+                <button onclick="switchTab('login')" id="tab-login" class="flex-1 py-4 rounded-2xl font-black text-xs transition-all bg-gold text-black">تسجيل الدخول</button>
+                <button onclick="switchTab('signup')" id="tab-signup" class="flex-1 py-4 rounded-2xl font-black text-xs transition-all text-gray-500">حساب جديد</button>
+            </div>
+
+            <div id="auth-form" class="space-y-6"></div>
+
+            <button onclick="startMakiExperience()" class="w-full mt-10 py-5 rounded-3xl bg-gradient-to-r from-gold to-royal text-black font-black text-sm shadow-[0_15px_40px_rgba(212,175,55,0.3)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-4">
+                <span>فتح القفل</span>
+                <i data-lucide="key-round"></i>
+            </button>
+        </div>
+    </section>
+
+    <div id="main-app" class="hidden opacity-0 transition-all duration-1000">
         
-        <header class="sticky top-0 z-50 glass-panel !rounded-none !border-t-0 !border-x-0 p-6 flex justify-between items-center bg-black/60">
-            <div class="flex items-center gap-4">
-                <div class="relative">
-                    <img id="user-avatar" src="" class="w-14 h-14 rounded-2xl object-cover border-2 border-gold shadow-gold/30 shadow-md">
-                    <div class="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-black"></div>
+        <header class="sticky top-0 z-[100] bg-black/60 backdrop-blur-3xl border-b border-white/5 p-6 md:px-16 flex justify-between items-center">
+            <div class="flex items-center gap-5">
+                <div class="relative group">
+                    <img id="user-avatar" src="" class="w-16 h-16 rounded-[2rem] border-2 border-gold shadow-2xl object-cover group-hover:rotate-6 transition-transform">
+                    <div class="absolute inset-0 bg-gold/10 rounded-[2rem] animate-pulse"></div>
                 </div>
                 <div>
-                    <h2 id="display-name" class="font-black text-lg"></h2>
-                    <span id="display-rank" class="text-[10px] bg-gold/10 text-gold px-2 py-0.5 rounded-full font-black border border-gold/20">طالب ملكي</span>
+                    <h3 id="user-name-display" class="font-black text-2xl maki-glow">عبد الرحمن مكي</h3>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <p id="user-stage-display" class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"></p>
+                    </div>
                 </div>
             </div>
-            <button onclick="location.reload()" class="p-3 bg-red-500/10 text-red-500 rounded-xl"><i data-lucide="power"></i></button>
+            
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex bg-white/5 px-6 py-3 rounded-2xl border border-white/10 items-center gap-3">
+                    <i data-lucide="gem" class="text-gold w-5 h-5"></i>
+                    <span id="user-points" class="font-black text-gold">2450 XP</span>
+                </div>
+                <button onclick="logoutMaki()" class="p-4 bg-red-500/10 text-red-500 rounded-2xl border border-red-500/10 hover:bg-red-500 hover:text-white transition-all">
+                    <i data-lucide="power"></i>
+                </button>
+            </div>
         </header>
 
-        <main class="p-6 space-y-10 pb-32">
-            
-            <section class="reveal">
-                <h3 class="text-3xl font-black italic mb-2">أهلاً بك في <span class="maki-gradient">رِكاز</span></h3>
-                <p class="text-gray-500 text-sm font-bold">اختر مادتك وابدأ رحلة التفوق اليوم.</p>
+        <main class="max-w-7xl mx-auto p-6 md:p-12 pb-40 space-y-24">
+
+            <section id="live-banner" class="hidden reveal-item">
+                <div class="glass-panel !border-red-600/30 p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden group">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-red-600/10 blur-[100px] rounded-full group-hover:bg-red-600/20 transition-all"></div>
+                    <div class="flex items-center gap-6 z-10">
+                        <div class="relative">
+                            <span class="absolute inset-0 animate-ping rounded-full bg-red-600 opacity-20"></span>
+                            <div class="w-20 h-20 bg-red-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-red-600/40">
+                                <i data-lucide="video" class="text-white w-10 h-10"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-black text-white italic">البث المباشر يعمل الآن!</h4>
+                            <p class="text-gray-400 text-sm mt-1">انضم لمحاضرة المراجعة النهائية مع مكي وفريق رِكاز.</p>
+                        </div>
+                    </div>
+                    <button class="w-full md:w-auto px-10 py-4 bg-red-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-red-600/20 hover:scale-105 active:scale-95 transition-all z-10">دخول المحاضرة</button>
+                </div>
             </section>
 
-            <section>
-                <div class="flex items-center justify-between mb-6">
-                    <h4 class="font-black text-xl border-r-4 border-gold pr-3">المكتبة الرقمية</h4>
-                    <span id="stage-badge" class="text-[10px] text-gray-400 font-bold"></span>
+            <section id="library">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="w-10 h-[2px] bg-gold"></span>
+                            <span class="text-gold font-black text-xs uppercase tracking-[0.3em]">Knowledge Hub</span>
+                        </div>
+                        <h4 class="text-5xl font-black italic">خزانة <span class="text-gold">الكتب</span></h4>
+                    </div>
+                    <div class="flex bg-white/5 p-1.5 rounded-[1.5rem] border border-white/5 overflow-x-auto w-full md:w-auto no-scrollbar">
+                        <button onclick="loadLibrary('all')" class="px-8 py-3 rounded-xl font-bold text-xs whitespace-nowrap active-filter">الكل</button>
+                        <button onclick="loadLibrary('3s')" class="px-8 py-3 rounded-xl font-bold text-xs text-gray-500 whitespace-nowrap">ثالثة ثانوي</button>
+                        <button onclick="loadLibrary('azhar')" class="px-8 py-3 rounded-xl font-bold text-xs text-gray-500 whitespace-nowrap">أزهري</button>
+                    </div>
                 </div>
-                <div id="library-grid" class="grid grid-cols-2 gap-4">
+
+                <div id="books-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     </div>
             </section>
 
-            <div id="quiz-container" class="hidden fixed inset-0 z-[60] bg-black p-6 flex flex-col">
-                <div class="flex justify-between items-center mb-8">
-                    <button onclick="closeQuiz()" class="text-gray-400"><i data-lucide="x-circle"></i></button>
-                    <div id="quiz-timer" class="text-red-500 font-black text-xl font-mono">10:00</div>
+            <section id="honor-roll" class="reveal-item">
+                <div class="p-12 glass-panel rounded-[4rem] relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-30"></div>
+                    <div class="text-center mb-16">
+                        <h4 class="text-4xl font-black italic mb-4">لوحة <span class="text-gold">الشرف الملكية</span></h4>
+                        <p class="text-gray-500 font-medium">الطلاب الأكثر تفاعلاً وتحميلاً للكتب لهذا الشهر</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10 text-center relative pt-16">
+                            <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-[#C0C0C0] rounded-full flex items-center justify-center border-4 border-dark shadow-2xl">
+                                <i data-lucide="award" class="text-black"></i>
+                            </div>
+                            <h5 class="font-black text-xl mb-1">أحمد محمد</h5>
+                            <p class="text-gold font-bold text-xs">2100 XP</p>
+                        </div>
+                        <div class="p-8 bg-gold/10 rounded-3xl border-2 border-gold text-center relative pt-20 scale-110 shadow-2xl shadow-gold/10">
+                            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 bg-gold rounded-full flex items-center justify-center border-4 border-dark shadow-2xl">
+                                <i data-lucide="trophy" class="text-black w-10 h-10"></i>
+                            </div>
+                            <h5 class="font-black text-2xl mb-1">محمد عبد الله</h5>
+                            <p class="text-gold font-bold text-sm">2450 XP</p>
+                        </div>
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10 text-center relative pt-16">
+                            <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 bg-[#CD7F32] rounded-full flex items-center justify-center border-4 border-dark shadow-2xl">
+                                <i data-lucide="medal" class="text-black"></i>
+                            </div>
+                            <h5 class="font-black text-xl mb-1">ياسين خالد</h5>
+                            <p class="text-gold font-bold text-xs">1950 XP</p>
+                        </div>
+                    </div>
                 </div>
-                <div id="quiz-box" class="glass-panel p-8 flex-1 flex flex-col justify-center text-center">
-                    <h2 id="q-text" class="text-2xl font-bold mb-10 leading-relaxed"></h2>
-                    <div id="q-options" class="grid gap-4"></div>
-                </div>
-                <button id="next-q-btn" onclick="nextQuestion()" class="w-full btn-maki py-5 mt-6 rounded-3xl opacity-50" disabled>السؤال التالي</button>
-            </div>
+            </section>
 
         </main>
 
-        <nav class="fixed bottom-6 left-6 right-6 h-20 glass-panel flex items-center justify-around px-4 z-50 shadow-2xl">
-            <button onclick="showTab('books')" class="nav-item text-gold transition-all"><i data-lucide="home"></i></button>
-            <button onclick="alert('قسم التلخيصات قريباً في تحديث مكي القادم!')" class="nav-item text-gray-500"><i data-lucide="file-text"></i></button>
-            <button onclick="alert('مركز الدعم الفني لمكي متاح 24 ساعة')" class="nav-item text-gray-500"><i data-lucide="message-circle"></i></button>
+        <div id="gemini-chat-window" class="fixed bottom-36 left-6 right-6 md:left-auto md:right-12 md:w-96 z-[300]">
+            <div class="glass-panel p-6 rounded-[2.5rem] border-2 border-white/10 shadow-2xl bg-dark/90 backdrop-blur-2xl h-[500px] flex flex-col">
+                <div class="flex items-center justify-between mb-4 border-b border-white/5 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <i data-lucide="sparkles" class="text-white w-6 h-6 animate-pulse"></i>
+                        </div>
+                        <h4 class="font-black text-lg gemini-gradient tracking-tight">مساعد جيميناي</h4>
+                    </div>
+                    <button onclick="toggleGemini()" class="text-gray-500 hover:text-white transition-colors">
+                        <i data-lucide="x-circle"></i>
+                    </button>
+                </div>
+                <div id="chat-content" class="flex-1 overflow-y-auto space-y-4 mb-4 custom-scrollbar px-2">
+                    <div class="bg-white/5 p-4 rounded-2xl text-xs leading-relaxed border border-white/5">
+                        أهلاً بك يا بطل رِكاز! أنا **Gemini**، مساعدك الذكي. كيف يمكنني مساعدتك في دراستك اليوم؟
+                    </div>
+                </div>
+                <div class="flex gap-2 relative">
+                    <input type="text" id="gemini-input" placeholder="اسأل جيميناي أي شيء..." class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-xs focus:border-gold outline-none transition-all">
+                    <button onclick="sendToGemini()" class="absolute left-2 top-2 bottom-2 bg-gold text-black px-4 rounded-xl font-bold hover:scale-95 transition-all">
+                        <i data-lucide="send" size="18"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-xl h-24 bg-black/40 backdrop-blur-3xl rounded-[3rem] border border-white/10 flex justify-around items-center px-10 z-[200] shadow-[0_30px_60px_rgba(0,0,0,0.8)]">
+            <button onclick="navigate('home')" class="nav-link active text-gold transition-all"><i data-lucide="home" size="28"></i></button>
+            <button onclick="navigate('books')" class="nav-link text-gray-600 hover:text-gold transition-all"><i data-lucide="book-open" size="28"></i></button>
+            <div class="relative -top-12">
+                <button onclick="navigate('live')" class="w-20 h-20 bg-gold rounded-[2rem] flex items-center justify-center shadow-2xl shadow-gold/40 text-black hover:rotate-12 transition-all">
+                    <i data-lucide="zap" size="32" fill="currentColor"></i>
+                </button>
+            </div>
+            <button onclick="toggleGemini()" class="text-gray-600 hover:text-blue-400 transition-all">
+                <i data-lucide="sparkles" size="28"></i>
+            </button>
+            <button onclick="navigate('profile')" class="nav-link text-gray-600 hover:text-gold transition-all"><i data-lucide="user" size="28"></i></button>
         </nav>
     </div>
 
+    <footer class="p-12 text-center border-t border-white/5 space-y-6">
+        <h2 class="text-4xl font-black brand-name">REKAZ 2026</h2>
+        <p class="text-gray-600 text-xs font-bold tracking-[0.5em] uppercase">Built for Excellence by Ab Maki</p>
+        <div class="flex justify-center gap-8">
+            <i data-lucide="instagram" class="text-gray-500 hover:text-gold cursor-pointer transition-colors"></i>
+            <i data-lucide="facebook" class="text-gray-500 hover:text-gold cursor-pointer transition-colors"></i>
+            <i data-lucide="youtube" class="text-gray-500 hover:text-gold cursor-pointer transition-colors"></i>
+        </div>
+    </footer>
+
+    <div id="maki-notification" class="fixed top-10 left-1/2 -translate-x-1/2 z-[2000] hidden transition-all duration-500">
+        <div class="bg-gold text-black px-12 py-5 rounded-[2rem] font-black shadow-2xl flex items-center gap-4">
+            <i data-lucide="check-circle" class="w-6 h-6"></i>
+            <span id="notification-text">تم تفعيل النظام الملكي</span>
+        </div>
+    </div>
+
     <script>
-        // قاعدة البيانات المتطورة
-        const DATA = {
-            stages: ["رابعة ابتدائي", "خامسة ابتدائي", "سادسة ابتدائي", "أولى إعدادي", "تانية إعدادي", "تالتة إعدادي", "أولى ثانوي", "تانية ثانوي", "تالتة ثانوي"],
-            subjects: {
-                elementary: ["اللغة العربية", "الرياضيات", "العلوم", "الدراسات"],
-                secondary: ["الفيزياء", "الكيمياء", "الأحياء", "التاريخ", "الجغرافيا", "الفلسفة"]
-            },
-            questions: [
-                { q: "ما هي عاصمة جمهورية مصر العربية؟", o: ["المنصورة", "القاهرة", "الإسكندرية", "الأقصر"], c: 1 },
-                { q: "أكبر كوكب في المجموعة الشمسية هو؟", o: ["الأرض", "المريخ", "المشتري", "زحل"], c: 2 }
-            ]
-        };
+        function toggleGemini() {
+            const chat = document.getElementById('gemini-chat-window');
+            chat.classList.toggle('active');
+        }
 
-        let currentAuthMode = 'login';
-        let userPfp = "https://ui-avatars.com/api/?background=D4AF37&color=000&size=256";
-
-        // تبديل واجهة الدخول
-        function toggleAuth(mode) {
-            currentAuthMode = mode;
-            const inputs = document.getElementById('auth-inputs');
-            document.getElementById('btn-login').className = mode === 'login' ? 'flex-1 py-3 rounded-xl font-bold bg-gold text-black' : 'flex-1 py-3 rounded-xl font-bold text-gray-400';
-            document.getElementById('btn-signup').className = mode === 'signup' ? 'flex-1 py-3 rounded-xl font-bold bg-gold text-black' : 'flex-1 py-3 rounded-xl font-bold text-gray-400';
+        function sendToGemini() {
+            const input = document.getElementById('gemini-input');
+            const chatContent = document.getElementById('chat-content');
             
-            if(mode === 'login') {
-                inputs.innerHTML = `
-                    <input type="text" id="u-name-in" placeholder="اسم المستخدم" class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-gold transition-all">
-                    <input type="password" id="u-pass-in" placeholder="كلمة المرور" class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-gold transition-all">
-                `;
-            } else {
-                inputs.innerHTML = `
-                    <div class="flex justify-center mb-4">
-                        <label class="w-20 h-20 rounded-2xl border-2 border-dashed border-gold/30 flex items-center justify-center cursor-pointer overflow-hidden">
-                            <img id="temp-pfp" class="hidden w-full h-full object-cover">
-                            <i id="cam-icon" data-lucide="camera" class="text-gold"></i>
-                            <input type="file" class="hidden" onchange="previewImg(this)">
-                        </label>
-                    </div>
-                    <input type="text" id="u-name-in" placeholder="اسمك بالكامل" class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-gold transition-all">
-                    <select id="u-stage-in" class="w-full p-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-gold text-gray-400">
-                        ${DATA.stages.map(s => `<option value="${s}">${s}</option>`).join('')}
-                    </select>
-                `;
-            }
-            lucide.createIcons();
-        }
+            if (input.value.trim() === "") return;
 
-        function previewImg(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    userPfp = e.target.result;
-                    document.getElementById('temp-pfp').src = e.target.result;
-                    document.getElementById('temp-pfp').classList.remove('hidden');
-                    document.getElementById('cam-icon').classList.add('hidden');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // معالجة الدخول
-        function handleAuth() {
-            const name = document.getElementById('u-name-in').value;
-            if(!name) return alert("أدخل اسمك يا بطل!");
-
-            const stage = document.getElementById('u-stage-in')?.value || "الثالث الثانوي";
+            // إضافة رسالة المستخدم
+            chatContent.innerHTML += `<div class="bg-gold/10 p-3 rounded-2xl text-xs text-gold border border-gold/20 text-left">أنت: ${input.value}</div>`;
             
-            document.getElementById('display-name').innerText = name;
-            document.getElementById('display-rank').innerText = stage;
-            document.getElementById('stage-badge').innerText = `المنهج المعتمد لـ ${stage}`;
-            document.getElementById('user-avatar').src = userPfp;
+            // محاكاة استجابة ذكاء اصطناعي
+            setTimeout(() => {
+                chatContent.innerHTML += `<div class="bg-white/5 p-3 rounded-2xl text-xs border border-white/10 italic">جيميناي: جاري التفكير في سؤالك... سأقوم بمساعدتك فوراً!</div>`;
+                chatContent.scrollTop = chatContent.scrollHeight;
+            }, 1000);
 
-            document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('app-content').classList.remove('hidden');
-            setTimeout(() => { document.getElementById('app-content').classList.add('opacity-100'); }, 50);
-            
-            renderLibrary(stage);
+            input.value = "";
+            chatContent.scrollTop = chatContent.scrollHeight;
         }
-
-        function renderLibrary(stage) {
-            const grid = document.getElementById('library-grid');
-            const list = stage.includes("ابتدائي") ? DATA.subjects.elementary : DATA.subjects.secondary;
-            
-            grid.innerHTML = list.map(sub => `
-                <div onclick="startQuiz('${sub}')" class="glass-panel p-6 text-center group hover:bg-gold/5 transition-all">
-                    <div class="w-14 h-14 bg-gold/10 rounded-2xl mx-auto mb-4 flex items-center justify-center text-gold group-hover:scale-110 transition-all">
-                        <i data-lucide="book-open"></i>
-                    </div>
-                    <h5 class="font-black text-xs mb-2">${sub}</h5>
-                    <button class="text-[8px] bg-white/10 px-3 py-1 rounded-full text-gray-400 font-bold uppercase">فتح الكتاب</button>
-                </div>
-            `).join('');
-            lucide.createIcons();
-        }
-
-        // نظام الاختبارات
-        let currentSub = '';
-        let qIndex = 0;
-
-        function startQuiz(sub) {
-            currentSub = sub;
-            qIndex = 0;
-            document.getElementById('quiz-container').classList.remove('hidden');
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const q = DATA.questions[qIndex];
-            if(!q) {
-                alert("تهانينا! لقد أتممت اختبار " + currentSub);
-                return closeQuiz();
-            }
-            document.getElementById('q-text').innerText = q.q;
-            document.getElementById('q-options').innerHTML = q.o.map((o, i) => `
-                <button onclick="checkAnswer(${i}, ${q.c})" class="q-btn w-full p-5 rounded-2xl border border-white/5 bg-white/5 text-right font-bold transition-all">
-                    ${o}
-                </button>
-            `).join('');
-            document.getElementById('next-q-btn').disabled = true;
-            document.getElementById('next-q-btn').classList.add('opacity-50');
-        }
-
-        function checkAnswer(idx, correct) {
-            const btns = document.querySelectorAll('.q-btn');
-            btns.forEach(b => b.disabled = true);
-            if(idx === correct) {
-                btns[idx].classList.add('bg-green-500/20', 'border-green-500', 'text-green-500');
-            } else {
-                btns[idx].classList.add('bg-red-500/20', 'border-red-500', 'text-red-500');
-                btns[correct].classList.add('bg-green-500/20', 'border-green-500');
-            }
-            document.getElementById('next-q-btn').disabled = false;
-            document.getElementById('next-q-btn').classList.remove('opacity-50');
-        }
-
-        function nextQuestion() { qIndex++; showQuestion(); }
-        function closeQuiz() { document.getElementById('quiz-container').classList.add('hidden'); }
-
-        // تشغيل أولي
-        toggleAuth('login');
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -20,6 +20,16 @@
                         royal: '#8E6F3E',
                         pearl: '#F9F6F0',
                         cream: '#FFFFFF',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
                     }
                 }
             }
@@ -85,6 +95,13 @@
         .book-content h3 { color: #C5A059; font-weight: 700; margin-top: 1.5rem; }
         .book-content p { line-height: 1.8; margin-bottom: 1.2rem; text-align: justify; color: #4A4A4A; font-size: 0.95rem; }
         .book-content ul { list-style: circle; padding-right: 20px; margin-bottom: 1rem; color: #555; }
+
+        /* تجميل التفاعلات */
+        .post-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(142, 111, 62, 0.1); }
+        .nav-btn.active { color: #C5A059; transform: scale(1.1); }
+        .achievement-badge { filter: grayscale(1); transition: all 0.5s ease; }
+        .achievement-badge.unlocked { filter: grayscale(0); transform: scale(1.1); border-color: #C5A059; }
     </style>
 </head>
 <body class="antialiased">
@@ -156,7 +173,7 @@
                 </button>
                 <div>
                     <h3 id="user-name-display" class="font-bold text-gray-800 text-sm">المستخدم</h3>
-                    <p class="text-[9px] text-gold font-black uppercase tracking-tighter">Elite Member</p>
+                    <p class="text-[9px] text-gold font-black uppercase tracking-tighter italic">عضو ملكي مستنير</p>
                 </div>
             </div>
             <h1 class="brand-name text-3xl font-bold md:block hidden">رِكاز</h1>
@@ -166,10 +183,11 @@
         <main class="max-w-4xl mx-auto p-6 pb-40 space-y-12">
             <div id="section-home" class="space-y-12">
                 <section id="feed" class="space-y-6">
-                    <div class="glass-panel p-6 rounded-3xl border-none shadow-sm">
+                    <div class="glass-panel p-6 rounded-3xl border-none shadow-sm animate-float">
                         <textarea id="post-input" placeholder="اكتب فكرة تليق بمقام رِكاز..." class="w-full bg-transparent p-2 rounded-2xl outline-none resize-none h-24 text-gray-600 font-medium"></textarea>
-                        <div class="flex justify-end mt-2">
-                            <button onclick="createPost()" class="px-8 py-2 bg-gold text-white rounded-xl font-bold text-xs shadow-md shadow-gold/20">نشر</button>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-[10px] text-gold/60 font-bold">كل مشاركة تزيد من رِكاز معرفتك</span>
+                            <button onclick="createPost()" class="px-8 py-2 bg-gold text-white rounded-xl font-bold text-xs shadow-md shadow-gold/20 hover:scale-105 transition-transform">نشر</button>
                         </div>
                     </div>
                     <div id="posts-container" class="space-y-6"></div>
@@ -178,9 +196,12 @@
 
             <div id="section-books" class="hidden space-y-10 animate-in fade-in duration-700">
                 <div class="glass-panel p-10 rounded-[2.5rem]">
-                    <div class="flex items-center gap-4 mb-8">
-                        <i data-lucide="library" class="text-gold w-8 h-8"></i>
-                        <h2 class="text-4xl font-bold brand-name">منهج الفقه المالكي - 2 ثانوي</h2>
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <i data-lucide="library" class="text-gold w-8 h-8"></i>
+                            <h2 class="text-4xl font-bold brand-name">منهج الفقه المالكي - 2 ثانوي</h2>
+                        </div>
+                        <span class="px-4 py-1 bg-gold/10 text-gold rounded-full text-[10px] font-black">المقرر الكامل</span>
                     </div>
                     <div class="book-content custom-scrollbar h-[550px] overflow-y-auto px-4">
                         <h2>كتاب البيوع</h2>
@@ -213,6 +234,31 @@
                     </div>
                 </div>
             </div>
+
+            <div id="section-medals" class="hidden space-y-10 animate-in fade-in duration-700">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div id="medal-1" class="achievement-badge glass-panel p-6 rounded-3xl text-center border-2">
+                        <i data-lucide="star" class="w-10 h-10 mx-auto text-gold mb-2"></i>
+                        <h4 class="text-xs font-bold">بداية الرحلة</h4>
+                        <p class="text-[8px] text-gray-400">سجلت دخولك الأول</p>
+                    </div>
+                    <div id="medal-2" class="achievement-badge glass-panel p-6 rounded-3xl text-center border-2">
+                        <i data-lucide="pen-tool" class="w-10 h-10 mx-auto text-gold mb-2"></i>
+                        <h4 class="text-xs font-bold">ناشر العلم</h4>
+                        <p class="text-[8px] text-gray-400">نشرت أول فكرة لك</p>
+                    </div>
+                    <div id="medal-3" class="achievement-badge glass-panel p-6 rounded-3xl text-center border-2">
+                        <i data-lucide="message-square" class="w-10 h-10 mx-auto text-gold mb-2"></i>
+                        <h4 class="text-xs font-bold">صديق Gemini</h4>
+                        <p class="text-[8px] text-gray-400">تحدثت مع المساعد</p>
+                    </div>
+                    <div id="medal-4" class="achievement-badge glass-panel p-6 rounded-3xl text-center border-2">
+                        <i data-lucide="crown" class="w-10 h-10 mx-auto text-gold mb-2"></i>
+                        <h4 class="text-xs font-bold">المستنير</h4>
+                        <p class="text-[8px] text-gray-400">تصفحت المكتبة كاملة</p>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <div id="gemini-chat-window" class="fixed bottom-32 left-6 right-6 md:left-auto md:right-12 md:w-[360px] z-[300]">
@@ -234,29 +280,30 @@
             </div>
         </div>
 
-        <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[85%] max-w-sm h-20 bg-white/80 backdrop-blur-2xl rounded-full border border-gold/10 flex justify-around items-center z-[200] shadow-xl">
-            <button onclick="showSection('home')" id="nav-home" class="text-gold transition-all"><i data-lucide="layout-grid"></i></button>
-            <button onclick="showSection('books')" id="nav-books" class="text-gray-300 transition-all"><i data-lucide="book-marked"></i></button>
-            <button onclick="toggleGemini()" class="w-14 h-14 bg-gradient-to-b from-gold to-royal rounded-2xl flex items-center justify-center text-white shadow-lg -mt-10 border-4 border-pearl transition-transform hover:scale-105">
+        <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm h-20 bg-white/80 backdrop-blur-2xl rounded-full border border-gold/10 flex justify-around items-center z-[200] shadow-xl">
+            <button onclick="showSection('home')" id="nav-home" class="nav-btn text-gold transition-all"><i data-lucide="layout-grid"></i></button>
+            <button onclick="showSection('books')" id="nav-books" class="nav-btn text-gray-300 transition-all"><i data-lucide="book-marked"></i></button>
+            <button onclick="toggleGemini()" class="w-14 h-14 bg-gradient-to-b from-gold to-royal rounded-2xl flex items-center justify-center text-white shadow-lg -mt-10 border-4 border-pearl transition-transform hover:scale-110 active:scale-95">
                 <i data-lucide="zap"></i>
             </button>
-            <button class="text-gray-300"><i data-lucide="scroll-text"></i></button>
+            <button onclick="showSection('medals')" id="nav-medals" class="nav-btn text-gray-300 transition-all"><i data-lucide="medal"></i></button>
             <button onclick="openProfileEdit()" class="text-gray-300"><i data-lucide="user-cog"></i></button>
         </nav>
     </div>
 
     <div id="profile-modal" class="fixed inset-0 z-[1000] bg-white/80 hidden items-center justify-center p-6 backdrop-blur-md">
-        <div class="glass-panel w-full max-w-sm p-8 rounded-[3rem] text-center">
+        <div class="glass-panel w-full max-sm:w-full max-w-sm p-8 rounded-[3rem] text-center">
             <h3 class="text-xl font-bold text-gold mb-6">تحديث البيانات الملكية</h3>
             <div class="flex justify-center mb-6">
-                <label class="relative cursor-pointer">
-                    <img id="edit-pfp-preview" class="w-24 h-24 rounded-3xl border-2 border-gold/20 object-cover p-1">
+                <label class="relative cursor-pointer group">
+                    <img id="edit-pfp-preview" class="w-24 h-24 rounded-3xl border-2 border-gold/20 object-cover p-1 group-hover:scale-105 transition-transform">
+                    <div class="absolute inset-0 bg-black/20 rounded-3xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i data-lucide="camera" class="text-white"></i></div>
                     <input type="file" class="hidden" onchange="updateProfilePFP(this)">
                 </label>
             </div>
-            <input type="text" id="edit-name-input" class="w-full bg-white border border-gold/10 p-4 rounded-xl mb-4 text-center" placeholder="الاسم الجديد">
+            <input type="text" id="edit-name-input" class="w-full bg-white border border-gold/10 p-4 rounded-xl mb-4 text-center font-bold" placeholder="الاسم الجديد">
             <div class="flex gap-2">
-                <button onclick="saveProfileChanges()" class="flex-1 py-3 bg-gold text-white rounded-xl font-bold">تأكيد</button>
+                <button onclick="saveProfileChanges()" class="flex-1 py-3 bg-gold text-white rounded-xl font-bold hover:shadow-lg">تأكيد</button>
                 <button onclick="closeProfileEdit()" class="flex-1 py-3 bg-gray-50 text-gray-400 rounded-xl">تراجع</button>
             </div>
         </div>
@@ -267,22 +314,30 @@
         let authMode = 'login';
         let currentUser = null;
 
-        // منطق ردود الذكاء الاصطناعي (Gemini Simulation)
+        // منطق ردود الذكاء الاصطناعي المطوّر
         const geminiLogic = (query) => {
             query = query.toLowerCase();
-            if (query.includes("بيع")) return "البيع في الفقه المالكي هو عقد معاوضة على غير منافع. هل تريد معرفة أركانه؟";
-            if (query.includes("ربا")) return "الربا نوعان: ربا الفضل (زيادة في القدر) وربا النساء (تأخير القبض). وكلاهما محرم.";
-            if (query.includes("نكاح") || query.includes("زواج")) return "النكاح في مذهبنا يشترط فيه الولي والصداق والمحل والصيغة. هل تبحث عن تفاصيل الولي؟";
-            if (query.includes("رِكاز")) return "رِكاز هي منصة تعليمية فاخرة صممها Ab Maki لتسهيل العلوم الشرعية.";
-            return "بصفتي Gemini، أنا هنا لمساعدتك في فهم دروس الفقه المالكي المقررة عليك. اسألني عن أي باب من الأبواب المذكورة في المكتبة.";
+            unlockMedal(3);
+            if (query.includes("بيع")) return "البيع في الفقه المالكي هو عقد معاوضة على غير منافع. يشترط فيه التراضي وطهارة المبيع وقدرة التسليم. هل تود شرح ركن الصيغة؟";
+            if (query.includes("ربا")) return "الربا نوعان: ربا الفضل (زيادة في النوع الواحد كذهب بذهب مع زيادة) وربا النساء (التأخير في القبض). وكلاهما محرم شرعاً بنصوص قطعية.";
+            if (query.includes("نكاح") || query.includes("زواج")) return "النكاح ميثاق غليظ، أركانه عند الإمام مالك: الولي، الصداق، المحل، والصيغة. والولي شرط صحة لا ينعقد العقد بدونه.";
+            if (query.includes("سلم")) return "السلم (السلف) هو تقديم الثمن وتأخير المثمن الموصوف في الذمة. وهو رخصة استثنائية للحاجة.";
+            if (query.includes("خيار")) return "الخيار هو حق فسخ العقد أو إمضائه، والمشهور في المذهب خيار التروي وخيار العيب.";
+            if (query.includes("مساعدة") || query.includes("كيف")) return "يمكنني شرح أي باب في الفقه المالكي، أو مساعدتك في تصفح رِكاز. فقط اسألني عن موضوع محدد!";
+            return "بصفتي Gemini Advanced، أنا هنا لدعم رحلتك العلمية في رِكاز. هل يمكنني توضيح مسألة فقهية معينة لك؟";
         };
 
         function showSection(sectionId) {
             document.getElementById('section-home').classList.add('hidden');
             document.getElementById('section-books').classList.add('hidden');
+            document.getElementById('section-medals').classList.add('hidden');
             document.getElementById('section-' + sectionId).classList.remove('hidden');
-            document.getElementById('nav-home').className = sectionId === 'home' ? 'text-gold' : 'text-gray-300';
-            document.getElementById('nav-books').className = sectionId === 'books' ? 'text-gold' : 'text-gray-300';
+            
+            // تحديث حالة الأزرار
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('text-gold', 'scale-110'));
+            document.getElementById('nav-' + sectionId).classList.add('text-gold', 'scale-110');
+            
+            if(sectionId === 'books') unlockMedal(4);
         }
 
         function toggleAuthMode(mode) {
@@ -330,7 +385,11 @@
             setTimeout(() => {
                 document.getElementById('auth-gate').style.display = 'none';
                 document.getElementById('main-app').classList.remove('hidden');
-                setTimeout(() => { document.getElementById('main-app').style.opacity = '1'; loadPosts(); }, 100);
+                setTimeout(() => { 
+                    document.getElementById('main-app').style.opacity = '1'; 
+                    loadPosts(); 
+                    unlockMedal(1);
+                }, 100);
             }, 500);
             initGemini();
         }
@@ -339,17 +398,18 @@
             const text = document.getElementById('post-input').value;
             if(!text) return;
             const posts = JSON.parse(localStorage.getItem('rekaz_posts') || '[]');
-            posts.unshift({ author: currentUser.name, avatar: currentUser.pfp, content: text, time: "الآن" });
+            posts.unshift({ author: currentUser.name, avatar: currentUser.pfp, content: text, time: "منذ لحظات" });
             localStorage.setItem('rekaz_posts', JSON.stringify(posts));
             document.getElementById('post-input').value = "";
             loadPosts();
+            unlockMedal(2);
         }
 
         function loadPosts() {
             const container = document.getElementById('posts-container');
             const posts = JSON.parse(localStorage.getItem('rekaz_posts') || '[]');
             container.innerHTML = posts.map(p => `
-                <div class="glass-panel p-6 rounded-3xl animate-in slide-in-from-bottom-4 duration-500 shadow-sm border-none">
+                <div class="glass-panel p-6 rounded-3xl post-card animate-in slide-in-from-bottom-4 duration-500 shadow-sm border-none">
                     <div class="flex items-center gap-3 mb-4">
                         <img src="${p.avatar}" class="w-10 h-10 rounded-xl object-cover border border-gold/10">
                         <div><h5 class="font-bold text-gray-700 text-xs">${p.author}</h5><p class="text-[9px] text-gray-400">${p.time}</p></div>
@@ -357,6 +417,11 @@
                     <p class="text-xs text-gray-600 leading-relaxed font-bold">${p.content}</p>
                 </div>
             `).join('');
+        }
+
+        function unlockMedal(id) {
+            const medal = document.getElementById('medal-' + id);
+            if(medal) medal.classList.add('unlocked');
         }
 
         function openProfileEdit() {
@@ -385,7 +450,11 @@
             loadPosts();
         }
 
-        function toggleGemini() { document.getElementById('gemini-chat-window').classList.toggle('active'); }
+        function toggleGemini() { 
+            const chat = document.getElementById('gemini-chat-window');
+            chat.classList.toggle('active');
+            if(chat.classList.contains('active')) unlockMedal(3);
+        }
 
         function initGemini() {
             document.getElementById('chat-content').innerHTML = `<div class="bg-blue-50 p-4 rounded-2xl mb-2 text-blue-600 border border-blue-100">مرحباً ${currentUser.name}، أنا Gemini المساعد الذكي لرِكاز. كيف يمكنني تبسيط مادة الفقه لك اليوم؟</div>`;

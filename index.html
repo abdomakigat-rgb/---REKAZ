@@ -2,150 +2,174 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ab Maki Puzzles - مواجهة الألغاز</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ab Maki Puzzles - Face Duel</title>
+    
     <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root { --primary: #00f2ff; --danger: #ff3e3e; --bg: #050505; }
-        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, sans-serif; overflow: hidden; }
-        
-        /* تقسيم الشاشة */
-        .game-grid { display: grid; grid-template-rows: 1fr 1fr; height: 100vh; position: relative; }
-        .video-wrapper { position: relative; background: #000; border: 1px solid #1a1a1a; overflow: hidden; }
-        video { width: 100%; height: 100%; object-fit: cover; }
-        .mirror { transform: scaleX(-1); }
 
-        /* صندوق الألغاز العائم */
-        .puzzle-overlay {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 400px; background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(15px); border: 2px solid var(--primary);
-            border-radius: 25px; padding: 25px; text-align: center; z-index: 100;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+    <style>
+        :root { --primary: #00f2ff; --accent: #ff0055; --bg: #050505; }
+        
+        body { 
+            margin: 0; background: var(--bg); color: white; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            overflow: hidden; height: 100vh;
         }
 
-        .puzzle-text { font-size: 1.4rem; font-weight: bold; margin: 15px 0; min-height: 60px; color: #fff; }
-        
-        /* الأزرار */
-        .btn {
-            background: linear-gradient(90deg, #00f2ff, #0072ff);
+        /* تقسيم الشاشة لنصفين متساويين للكاميرات */
+        .game-container {
+            display: flex; flex-direction: column; height: 100vh; width: 100%;
+        }
+
+        .video-box {
+            flex: 1; position: relative; background: #000;
+            border: 1px solid #111; overflow: hidden;
+        }
+
+        video {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scaleX(-1); /* جعل الكاميرا كالمرآة */
+        }
+
+        /* صندوق الألغاز في منتصف الشاشة */
+        .puzzle-card {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 85%; max-width: 380px; background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px); border: 2px solid var(--primary);
+            border-radius: 20px; padding: 20px; text-align: center;
+            z-index: 100; box-shadow: 0 0 40px rgba(0, 242, 255, 0.3);
+        }
+
+        .puzzle-text {
+            font-size: 1.3rem; font-weight: bold; margin: 15px 0;
+            min-height: 50px; line-height: 1.5; color: #fff;
+        }
+
+        .btn-action {
+            background: linear-gradient(45deg, #00f2ff, #0072ff);
             border: none; padding: 12px 25px; border-radius: 12px;
             color: white; font-weight: bold; cursor: pointer;
-            transition: 0.3s; width: 100%; font-size: 1rem;
+            width: 100%; font-size: 1rem; transition: 0.3s;
         }
-        .btn:active { transform: scale(0.95); }
 
-        .timer-bar { height: 5px; background: var(--danger); width: 100%; margin-top: 15px; border-radius: 10px; transition: width 1s linear; }
+        .btn-action:active { transform: scale(0.95); }
 
-        /* معلومات اللاعبين */
-        .player-tag {
-            position: absolute; bottom: 15px; right: 15px;
-            background: rgba(0,0,0,0.6); padding: 5px 12px;
-            border-radius: 8px; font-size: 12px; border: 1px solid var(--primary);
+        /* شريط الوقت */
+        .timer-container {
+            width: 100%; height: 6px; background: #222; 
+            border-radius: 10px; margin-top: 15px; overflow: hidden;
         }
-        .room-id { position: fixed; top: 10px; left: 10px; font-size: 10px; color: #555; z-index: 200; }
+        .timer-fill {
+            width: 100%; height: 100%; background: var(--accent);
+            transition: width 1s linear;
+        }
+
+        .status-tag {
+            position: absolute; top: 10px; right: 10px;
+            background: rgba(0,0,0,0.7); padding: 5px 12px;
+            border-radius: 20px; font-size: 11px; border: 1px solid var(--primary);
+        }
     </style>
 </head>
 <body>
 
-    <div class="room-id">Server: Connected</div>
-
-    <div class="game-grid">
-        <div class="video-wrapper">
-            <video id="remote-video" autoplay></video>
-            <div class="player-tag"><i class="fas fa-user-secret"></i> الخصم</div>
+    <div class="game-container">
+        <div class="video-box">
+            <video id="remote-video" autoplay playsinline></video>
+            <div class="status-tag"><i class="fas fa-video"></i> الخصم أونلاين</div>
         </div>
 
-        <div class="puzzle-overlay">
-            <div id="setup-ui">
-                <h2 style="color: var(--primary)">تحدي الوجوه</h2>
-                <p>انتظر حتى تفتح الكاميرا، ثم اضغط ابدأ</p>
-                <button class="btn" onclick="requestNextPuzzle()">بدء التحدي <i class="fas fa-play"></i></button>
-            </div>
+        <div class="video-box">
+            <video id="local-video" autoplay playsinline muted></video>
+            <div class="status-tag" style="top: auto; bottom: 10px;"><i class="fas fa-user"></i> أنت (Ab Maki)</div>
+        </div>
+    </div>
 
-            <div id="game-ui" style="display: none;">
-                <div class="puzzle-text" id="puzzle-display">ما هو الشيء الذي يكتب ولا يقرأ؟</div>
-                <div class="timer-bar" id="timer-line"></div>
-                <button class="btn" style="margin-top:20px" onclick="requestNextPuzzle()">اللغز التالي <i class="fas fa-forward"></i></button>
-            </div>
+    <div class="puzzle-card">
+        <div id="start-screen">
+            <h2 style="color: var(--primary); margin-top: 0;">تحدي الوجوه</h2>
+            <p style="font-size: 14px; color: #aaa;">وري صاحبك وشك وحل الألغاز أسرع منه!</p>
+            <button class="btn-action" onclick="sendNextPuzzle()">ابدأ التحدي <i class="fas fa-play"></i></button>
         </div>
 
-        <div class="video-wrapper">
-            <video id="local-video" class="mirror" autoplay muted></video>
-            <div class="player-tag"><i class="fas fa-user"></i> أنت (Ab Maki)</div>
+        <div id="game-screen" style="display: none;">
+            <div class="puzzle-text" id="puzzle-content">جاري تحميل اللغز...</div>
+            <div class="timer-container"><div class="timer-fill" id="timer-bar"></div></div>
+            <button class="btn-action" style="margin-top: 20px;" onclick="sendNextPuzzle()">اللغز التالي <i class="fas fa-forward"></i></button>
         </div>
     </div>
 
     <script>
-        // الربط مع السيرفر (لو شغال محلي استخدم localhost:3000)
+        // تغيير الرابط لرابط السيرفر الخاص بك عند الرفع أونلاين
         const socket = io('http://localhost:3000'); 
-        const myPeer = new Peer();
-        
+        const peer = new Peer();
         const localVideo = document.getElementById('local-video');
         const remoteVideo = document.getElementById('remote-video');
-        const ROOM_ID = "maki_pro_room"; // اسم الغرفة الموحد
+        const timerBar = document.getElementById('timer-bar');
 
+        const ROOM_ID = "maki_duel_room"; // كود الغرفة الموحد
         let myStream;
 
-        // 1. تشغيل كاميرتك
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        // قائمة الألغاز
+        const puzzles = [
+            "شيء يملك أسنان كثيرة لكنه لا يعض؟ (المشط)",
+            "له عين واحدة ولكنه لا يرى؟ (الإبرة)",
+            "حاجة بتسمع بلا أذن وتتكلم بلا لسان؟ (التليفون)",
+            "ترميه كلما احتجت إليه؟ (شبكة الصيد)",
+            "شيء يكتب ولا يقرأ؟ (القلم)",
+            "يمشي وراك طول النهار ويختفي بالليل؟ (الضل)",
+            "حاجة كل ما تذبحها تعيط أنت عليها؟ (البصلة)",
+            "كلما زاد نقص؟ (العمر)",
+            "له وجهاً بلا عينين ويدين بلا أصابع؟ (الساعة)",
+            "حاجة بتعدي من القزاز بس مش بتكسره؟ (الضوء)"
+        ];
+
+        // 1. تشغيل الكاميرا والميكروفون
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
             myStream = stream;
             localVideo.srcObject = stream;
 
-            // استقبال اتصال من صديق
-            myPeer.on('call', call => {
+            peer.on('call', call => {
                 call.answer(stream);
                 call.on('stream', userStream => {
                     remoteVideo.srcObject = userStream;
                 });
             });
 
-            // عندما يتصل مستخدم جديد بالسيرفر
             socket.on('user-connected', userId => {
-                const call = myPeer.call(userId, stream);
+                const call = peer.call(userId, stream);
                 call.on('stream', userStream => {
                     remoteVideo.srcObject = userStream;
                 });
             });
         });
 
-        myPeer.on('open', id => {
+        peer.on('open', id => {
             socket.emit('join-room', ROOM_ID, id);
         });
 
-        // 2. إدارة الألغاز
-        const puzzles = [
-            "شيء يملك أسنان كثيرة لكنه لا يعض؟",
-            "له عين واحدة ولكنه لا يرى؟",
-            "يسمع بلا أذن ويتكلم بلا لسان؟",
-            "حاجة كل ما تذبحها تعيط أنت عليها؟",
-            "يمشي وراك طول النهار ويختفي بالليل؟"
-        ];
-
-        function requestNextPuzzle() {
-            const p = puzzles[Math.floor(Math.random() * puzzles.length)];
-            socket.emit('send-puzzle', p);
+        // 2. إدارة الألغاز أونلاين
+        function sendNextPuzzle() {
+            const randomPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
+            socket.emit('send-puzzle', randomPuzzle);
         }
 
         socket.on('new-puzzle', puzzle => {
-            document.getElementById('setup-ui').style.display = 'none';
-            document.getElementById('game-ui').style.display = 'block';
-            document.getElementById('puzzle-display').innerText = puzzle;
-            resetTimer();
-        });
-
-        function resetTimer() {
-            const line = document.getElementById('timer-line');
-            line.style.transition = 'none';
-            line.style.width = '100%';
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'block';
+            document.getElementById('puzzle-content').innerText = puzzle;
+            
+            // إعادة ضبط التايمر (20 ثانية)
+            timerBar.style.transition = 'none';
+            timerBar.style.width = '100%';
             setTimeout(() => {
-                line.style.transition = 'width 20s linear';
-                line.style.width = '0%';
+                timerBar.style.transition = 'width 20s linear';
+                timerBar.style.width = '0%';
             }, 50);
-        }
+        });
     </script>
 </body>
 </html>

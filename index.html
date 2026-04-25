@@ -32,8 +32,8 @@
                             '50%': { transform: 'translateY(-10px)' },
                         },
                         superGlow: {
-                            '0%, 100%': { filter: 'drop-shadow(0 0 10px #C5A059) brightness(1)' },
-                            '50%': { filter: 'drop-shadow(0 0 30px #C5A059) brightness(1.3)' },
+                            '0%, 100%': { filter: 'drop-shadow(0 0 15px rgba(197, 160, 89, 0.6)) brightness(1)' },
+                            '50%': { filter: 'drop-shadow(0 0 35px rgba(197, 160, 89, 0.8)) brightness(1.2)' },
                         }
                     }
                 }
@@ -43,7 +43,6 @@
     <style>
         body { font-family: 'Vazirmatn', sans-serif; background-color: #F9F6F0; color: #2D2D2D; overflow-x: hidden; }
         
-        /* تطبيق خط رِكاز الجديد (Alexandria) */
         .brand-name { 
             font-family: 'Alexandria', sans-serif; 
             font-weight: 900;
@@ -52,6 +51,8 @@
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
             animation: shine 3s linear infinite;
+            display: inline-block;
+            line-height: 1.2;
         }
 
         @keyframes shine {
@@ -66,11 +67,10 @@
             justify-content: center;
         }
         
-        /* تأثير تحميل جبار */
         .power-loader {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 280px;
+            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -84,17 +84,19 @@
             border-top-color: #C5A059;
             border-radius: 50%;
             animation: rotate 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            z-index: 10;
         }
 
         .loader-ring-inner {
             position: absolute;
-            width: 80%;
-            height: 80%;
+            width: 85%;
+            height: 85%;
             border: 4px solid transparent;
             border-bottom-color: #8E6F3E;
             border-radius: 50%;
             animation: rotate 2s linear infinite reverse;
-            opacity: 0.5;
+            opacity: 0.3;
+            z-index: 5;
         }
 
         @keyframes rotate {
@@ -142,7 +144,7 @@
         <div class="power-loader">
             <div class="loader-ring"></div>
             <div class="loader-ring-inner"></div>
-            <h1 class="text-7xl font-black brand-name select-none animate-super-glow">رِكاز</h1>
+            <h1 class="text-7xl font-black brand-name select-none animate-super-glow relative z-50">رِكاز</h1>
         </div>
         <div class="mt-12 flex flex-col items-center">
             <p id="loading-text" class="text-royal font-black tracking-[0.3em] text-[12px] uppercase mb-4 animate-pulse">يتم استحضار العظمة...</p>
@@ -158,7 +160,7 @@
                 <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-gold/10">
                     <i data-lucide="shield-check" class="text-gold w-8 h-8"></i>
                 </div>
-                <h2 class="text-6xl font-black brand-name mb-2">رِكاز</h2>
+                <h2 class="text-6xl font-black brand-name mb-2 py-2">رِكاز</h2>
                 <p id="auth-subtitle" class="text-gray-400 text-xs font-medium tracking-[0.1em]">عالم من المعرفة الراقية</p>
             </div>
 
@@ -399,7 +401,7 @@
                 content: `<h2>الأدب الأندلسي</h2><p>نشأ الأدب في الأندلس متأثراً بالمشرق ثم استقل بشخصيته، وظهرت فنون جديدة كالموشحات نتيجة لجمال الطبيعة والاختلاط الاجتماعي.</p><h2>الشعراء والمذاهب</h2><p>اشتهر ابن زيدون في الرسالة الجدية، والرندي في رثاء الأندلس. الأدب ينمي الثروة اللغوية ويعين على فهم إعجاز القرآن.</p>`,
                 summary: "الأدب الأندلسي يتميز بوصف الطبيعة والموشحات. ابن زيدون من أبرز شعراء الأندلس. رثاء الممالك فن ظهر بقوة مع سقوط المدن.",
                 quiz: [
-                    { q: "ما هو الفن الشعري الذي استحدثه الأندلسيون؟", options: ["النقائض", "الموشحات", "المعلقات"], correct: 1 }
+                    { q: "ما هو الفن الشعري الذي استحدثه الأندلسيون? ", options: ["النقائض", "الموشحات", "المعلقات"], correct: 1 }
                 ]
             },
             mantiq: {
@@ -685,7 +687,6 @@
             const bar = document.getElementById('progress-bar');
             const loadingText = document.getElementById('loading-text');
             
-            // مراحل التحميل الجبارة
             setTimeout(() => { bar.style.width = '30%'; loadingText.innerText = 'يتم تحليل الرموز الملكية...'; }, 500);
             setTimeout(() => { bar.style.width = '70%'; loadingText.innerText = 'بناء الجوهر المعرفي...'; }, 1200);
             setTimeout(() => { bar.style.width = '100%'; loadingText.innerText = 'اكتملت العظمة!'; }, 2000);

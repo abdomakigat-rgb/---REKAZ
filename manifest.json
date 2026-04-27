@@ -2,14 +2,14 @@
   "name": "منصة هِمة الذكية | HEMMA Platform",
   "short_name": "هِمة",
   "description": "المنصة الذكية لتنظيم الجداول الدراسية والمهام التعليمية وتواصل المتفوقين.",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f0f2f5",
   "theme_color": "#2563eb",
   "orientation": "portrait",
   "dir": "rtl",
   "lang": "ar-EG",
-  "scope": "/",
+  "scope": "./",
   "categories": ["education", "productivity"],
   "icons": [
     {

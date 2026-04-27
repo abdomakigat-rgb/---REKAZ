@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة هِمة الذكية | HEMMA Platform</title>
     
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest (1).json">
     <meta name="theme-color" content="#2563eb">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="هِمة">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -505,10 +510,10 @@
 </div>
 
 <script>
-    // [DEVELOPER ADDITION] تسجيل Service Worker للعمل بدون إنترنت وتثبيت التطبيق
+    // [تم التعديل] تسجيل Service Worker بالاسم الصحيح للملف المرفوع sw (1).js
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('sw (1).js')
                 .then(reg => console.log('Service Worker Registered!', reg))
                 .catch(err => console.log('Service Worker Registration Failed', err));
         });

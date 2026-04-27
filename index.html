@@ -306,6 +306,19 @@
             display: block; background: #f8fafc; border: 2px dashed #cbd5e1;
             padding: 10px; border-radius: 12px; cursor: pointer; margin-bottom: 15px; color: #64748b;
         }
+
+        /* تنسيق زر التثبيت الجديد */
+        #install-app-btn {
+            display: none;
+            background: var(--accent);
+            margin-bottom: 15px;
+            border-radius: 15px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
@@ -340,6 +353,10 @@
     </div>
 
     <div id="main-content" style="display: none;">
+        <button id="install-app-btn" onclick="installPWA()">
+            <i class="fas fa-download"></i> تثبيت المنصة على جهازك
+        </button>
+
         <div id="admin-panel">
             <h4><i class="fas fa-user-crown"></i> لوحة تحكم محمد (الأدمن)</h4>
             <div id="admin-users-list"></div>
@@ -394,8 +411,9 @@
 
         <footer>
             جميع الحقوق محفوظة لمنصة <span style="font-weight: bold; color: var(--primary);">هِمة</span> <br>
-            تم التطوير بواسطة <br>
-            <span class="dev-tag">محمد مصطفى محمد يوسف</span>
+            تم التطوير والتحديث بواسطة المبرمج <br>
+            <span class="dev-tag">محمد مصطفى محمد يوسف</span> <br>
+            <small>آخر تحديث: أبريل 2026</small>
         </footer>
     </div>
 </div>
@@ -423,6 +441,25 @@
     let selectedDays = [];
     let currentY = 50;
     let globalPosts = JSON.parse(localStorage.getItem('hemma_global_posts')) || [];
+    let deferredPrompt;
+
+    // منطق زر التثبيت
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('install-app-btn').style.display = 'block';
+    });
+
+    async function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                document.getElementById('install-app-btn').style.display = 'none';
+            }
+            deferredPrompt = null;
+        }
+    }
 
     function handleImage(input, targetId) {
         if (input.files && input.files[0]) {
@@ -569,7 +606,7 @@
         mainImg.style.objectPosition = `center ${currentY}%`;
         saveToStorage();
         closePhotoEditor();
-        renderPosts(); // تحديث الصورة في المنشورات بدون ريلود
+        renderPosts();
     }
 
     function createPost() {
@@ -604,8 +641,7 @@
         if (name && time && selectedDays.length > 0) {
             currentUser.lessons.push({ name, time, days: [...selectedDays] });
             saveToStorage();
-            renderLessons(); // تحديث الجدول فوراً بدون ريلود
-            // مسح الحقول بعد الإضافة
+            renderLessons();
             document.getElementById('subject-input').value = '';
             document.getElementById('time-input').value = '';
             document.querySelectorAll('.day-chip').forEach(c => c.classList.remove('selected'));

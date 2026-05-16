@@ -23,6 +23,7 @@
             src: url('thmanyahserifdisplay-Black.otf') format('opentype');
             font-weight: bold;
             font-style: normal;
+            font-display: swap;
         }
 
         :root {
@@ -32,6 +33,7 @@
             --pure-white: #ffffff;
             --gray-text: #b3b3b3;
             --accent-glow: rgba(230, 0, 0, 0.6);
+            --header-h: 90px;
         }
 
         * {
@@ -62,7 +64,7 @@
             box-shadow: 0 4px 30px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            height: 100px;
+            height: var(--header-h);
         }
 
         nav {
@@ -81,7 +83,7 @@
         }
 
         .logo-img {
-            height: 110px; 
+            height: 70px; 
             width: auto;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
@@ -105,7 +107,7 @@
             align-items: center;
         }
 
-        .nav-links li { margin-right: 25px; }
+        .nav-links li { margin-left: 25px; }
 
         .nav-links li a {
             color: #000000; 
@@ -119,13 +121,14 @@
 
         /* زر المنيو الخاص بالتثبيت */
         .menu-install-btn {
-            display: none; /* يظهر بالجافا سكريبت */
+            display: none; /* سيظهر بالجافا سكريبت */
             background: var(--main-red);
             color: #fff !important;
             padding: 8px 15px;
             border-radius: 10px;
             font-size: 0.9rem !important;
             box-shadow: 0 4px 10px rgba(230, 0, 0, 0.3);
+            cursor: pointer;
         }
 
         .menu-btn {
@@ -233,7 +236,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 20px;
+            padding: var(--header-h) 20px 0;
             background: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.95)), 
                         radial-gradient(circle at center, #600000 0%, var(--dark-black) 100%);
             position: relative;
@@ -428,7 +431,7 @@
                 right: -100%;
                 height: 100vh;
                 width: 100%;
-                background: rgba(255, 255, 255, 0.98);
+                background: rgba(10, 10, 10, 0.98); /* تم تعديله للاسود للفخامة */
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
@@ -449,10 +452,12 @@
                 transform: translateX(0);
                 opacity: 1;
             }
-            .nav-links li a { font-size: 1.8rem; }
+            .nav-links li a { font-size: 1.8rem; color: #fff; }
             header { height: 80px; }
-            .logo-img { height: 80px; }
+            .logo-img { height: 60px; }
             .menu-install-btn { display: block !important; margin-top: 20px; }
+            .menu-btn { color: #000; }
+            .nav-links.active ~ .menu-btn { color: #fff; } /* لون الايقونة عند فتح المنيو */
         }
     </style>
 </head>
@@ -483,7 +488,7 @@
                 <li><a href="#services">خدماتنا</a></li>
                 <li><a href="#portfolio">أعمالنا</a></li>
                 <li><a href="#contact">تواصل معنا</a></li>
-                <li><a href="javascript:void(0)" class="menu-install-btn" id="menuInstallBtn"><i class="fas fa-download" style="margin-left: 8px;"></i>تثبيت التطبيق</a></li>
+                <li><div class="menu-install-btn" id="menuInstallBtn"><i class="fas fa-download" style="margin-left: 8px;"></i>تثبيت التطبيق</div></li>
             </ul>
             <div class="menu-btn" id="menuToggle">
                 <i class="fas fa-bars"></i>
@@ -531,7 +536,7 @@
     <section id="contact">
         <h2 class="section-title">تواصل مع الإمبراطورية</h2>
         <div class="contact-grid">
-            <a href="https://wa.me/201112445685" class="contact-item">
+            <a href="https://wa.me/201112445685" class="contact-item" target="_blank">
                 <i class="fab fa-whatsapp"></i>
                 <h3>واتساب</h3>
                 <span class="contact-btn-text">إضغط هــنـــا للتواصل</span>
@@ -563,9 +568,9 @@
         // كود تشغيل الـ Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('Service Worker Registered'))
-                .catch(err => console.log('Service Worker Failed', err));
+                navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('SW Registered'))
+                .catch(err => console.log('SW Failed', err));
             });
         }
 
@@ -574,58 +579,39 @@
         const installBtn = document.getElementById('installBtn');
         const menuInstallBtn = document.getElementById('menuInstallBtn');
         const closeInstall = document.getElementById('closeInstall');
-        const bannerTitle = document.getElementById('banner-title');
-        const bannerDesc = document.getElementById('banner-desc');
 
-        // اكتشاف إذا كان الجهاز آيفون
-        const isIos = () => {
-            const userAgent = window.navigator.userAgent.toLowerCase();
-            return /iphone|ipad|ipod/.test(userAgent);
-        };
-
-        const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-
-        // منطق التثبيت للكمبيوتر والأندرويد
+        // منطق التثبيت للكمبيوتر والأندرويد (PWA)
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
             
-            // إظهار الخيارات
+            // إظهار الأزرار
             menuInstallBtn.style.display = 'block';
             setTimeout(() => {
-                installBanner.classList.add('show');
-            }, 3000);
+                if(!localStorage.getItem('bannerClosed')) {
+                    installBanner.classList.add('show');
+                }
+            }, 5000);
         });
 
-        // التعامل مع آيفون يدوياً عند الفتح
-        if (isIos() && !isInStandaloneMode()) {
-            menuInstallBtn.style.display = 'block';
-            bannerTitle.innerText = "ثبّت Ab Maki على iPhone";
-            bannerDesc.innerText = "اضغط على زر المشاركة ثم 'إضافة للشاشة الرئيسية'";
-            installBtn.innerText = "كيفية التثبيت؟";
-            
-            setTimeout(() => {
-                installBanner.classList.add('show');
-            }, 3000);
-        }
-
-        // دالة تنفيذ التثبيت
-        const executeInstall = () => {
+        // دالة التثبيت الشاملة (كمبيوتر + موبايل)
+        const executeInstall = async () => {
             if (deferredPrompt) {
-                // للكمبيوتر والأندرويد
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        installBanner.classList.remove('show');
-                        menuInstallBtn.style.display = 'none';
-                    }
-                    deferredPrompt = null;
-                });
-            } else if (isIos()) {
-                // للآيفون
-                alert("لتثبيت تطبيق Ab Maki Group:\n1. اضغط على أيقونة المشاركة (المربع والسهم) في Safari.\n2. اختر 'Add to Home Screen' أو 'إضافة للشاشة الرئيسية'.");
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBanner.classList.remove('show');
+                    menuInstallBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
             } else {
-                alert("التطبيق مثبت بالفعل أو متصفحك لا يدعم التثبيت المباشر.");
+                // فحص إذا كان ايفون
+                const isIos = /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+                if (isIos) {
+                    alert("لتثبيت التطبيق على iPhone:\n1. اضغط على زر 'مشاركة' بالأسفل.\n2. اختر 'إضافة للشاشة الرئيسية'.");
+                } else {
+                    alert("التطبيق مثبت بالفعل أو متصفحك لا يدعم التثبيت المباشر. يمكنك استخدام المتصفح حالياً.");
+                }
             }
         };
 
@@ -634,11 +620,13 @@
 
         closeInstall.addEventListener('click', () => {
             installBanner.classList.remove('show');
+            localStorage.setItem('bannerClosed', 'true');
         });
 
         window.addEventListener('appinstalled', () => {
             installBanner.classList.remove('show');
             menuInstallBtn.style.display = 'none';
+            alert("تم تثبيت Ab Maki Group بنجاح على جهازك!");
         });
 
         // كود المنيو
@@ -658,12 +646,10 @@
         });
 
         document.querySelectorAll('.nav-links li a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                if(e.target.id !== 'menuInstallBtn') {
-                    navLinks.classList.remove('active');
-                    icon.classList.replace('fa-times', 'fa-bars');
-                    menuBtn.style.transform = 'rotate(0deg)';
-                }
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                icon.classList.replace('fa-times', 'fa-bars');
+                menuBtn.style.transform = 'rotate(0deg)';
             });
         });
     </script>

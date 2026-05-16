@@ -39,17 +39,17 @@
             overflow-x: hidden;
         }
 
-        /* هيدر الموقع - احترافي ومنسق */
+        /* هيدر الموقع - تكبير اللوجو ليكون جباراً */
         header {
             background: #ffffff;
-            padding: 10px 8%; 
+            padding: 15px 8%; 
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
-            border-bottom: 3px solid var(--main-red);
-            box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+            border-bottom: 4px solid var(--main-red);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
         }
@@ -68,19 +68,19 @@
             text-decoration: none;
         }
 
-        /* تكبير اللوجو فقط بناءً على الطلب */
         .logo-img {
-            height: 100px; 
+            height: 130px; /* تم تكبير اللوجو أكثر ليكون مهيمناً */
             width: auto;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
         }
         
         .logo-img:hover {
-            transform: scale(1.1); 
+            transform: scale(1.1) rotate(2deg); 
         }
 
         .logo-text {
-            font-size: 1.5rem; /* الحفاظ على حجم النص لزيادة الاحترافية */
+            font-size: 1.6rem;
             color: #000000; 
             font-weight: bold;
             letter-spacing: -0.5px;
@@ -102,7 +102,7 @@
         nav ul li a {
             color: #000000; 
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: bold;
             transition: 0.3s ease;
         }
@@ -130,55 +130,40 @@
         }
 
         .hero-content h1 {
-            font-size: clamp(2.8rem, 9vw, 5.2rem);
-            margin-bottom: 25px;
-            text-shadow: 0px 0px 40px var(--accent-glow);
-            line-height: 1.1;
-        }
-
-        /* تحدي الخصم */
-        .promo-banner {
-            background: rgba(230, 0, 0, 0.1);
-            border: 2px dashed var(--main-red);
-            padding: 12px 25px;
-            border-radius: 15px;
-            display: inline-block;
+            font-size: clamp(3rem, 10vw, 5.5rem);
             margin-bottom: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .promo-banner span {
-            color: #ffcc00;
-            text-transform: uppercase;
+            text-shadow: 0px 0px 50px var(--accent-glow);
+            line-height: 1.1;
+            font-weight: 900;
         }
 
         .hero-content p {
-            font-size: clamp(1rem, 3vw, 1.6rem);
+            font-size: clamp(1.1rem, 3.5vw, 1.8rem);
             color: var(--gray-text);
-            margin-bottom: 40px;
-            max-width: 850px;
+            margin-bottom: 50px;
+            max-width: 950px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 500;
         }
 
         .btn {
             display: inline-block;
-            padding: 18px 50px;
+            padding: 20px 60px;
             background-color: var(--main-red);
             color: var(--pure-white);
             text-decoration: none;
-            font-size: 1.3rem;
-            border-radius: 50px;
+            font-size: 1.5rem;
+            border-radius: 60px;
             font-weight: bold;
-            box-shadow: 0 10px 30px var(--accent-glow);
-            transition: 0.4s;
+            box-shadow: 0 10px 40px var(--accent-glow);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 45px var(--accent-glow);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--accent-glow);
+            background: #ff0000;
         }
 
         /* قسم الخدمات */
@@ -189,73 +174,86 @@
         }
 
         .section-title {
-            font-size: 3rem;
-            margin-bottom: 60px;
+            font-size: 3.5rem;
+            margin-bottom: 70px;
             color: var(--pure-white);
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         .services-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
         }
 
         .service-card {
             background: var(--card-bg);
-            padding: 60px 35px;
-            border-radius: 35px;
+            padding: 65px 35px;
+            border-radius: 40px;
             border: 1px solid #222;
-            transition: 0.5s ease;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
         }
 
         .service-card:hover {
             border-color: var(--main-red);
-            transform: translateY(-15px);
-            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            transform: translateY(-20px);
+            background: linear-gradient(145deg, #1e1e1e, #0a0a0a);
+            box-shadow: 0 30px 60px rgba(230,0,0,0.2);
         }
 
         .speed-badge {
             position: absolute;
-            top: -15px;
+            top: -10px;
             right: 25px;
             background: var(--main-red);
             color: white;
-            padding: 6px 18px;
-            border-radius: 12px;
-            font-size: 0.85rem;
+            padding: 8px 20px;
+            border-radius: 15px;
+            font-size: 0.9rem;
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(230,0,0,0.4);
+            z-index: 2;
         }
 
-        /* تنسيق خاص لشارة الخصم */
         .discount-badge {
             background: #ffcc00;
             color: #000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .service-card i {
-            font-size: 4.5rem;
+            font-size: 4.8rem;
             margin-bottom: 30px;
             color: var(--main-red);
+            display: block;
             filter: drop-shadow(0 0 15px var(--accent-glow));
         }
 
         .service-card h3 {
-            font-size: 1.9rem;
+            font-size: 2rem;
             margin-bottom: 20px;
+            font-weight: 800;
         }
 
         .service-card p {
             color: var(--gray-text);
-            font-size: 1.15rem;
+            font-size: 1.2rem;
+            line-height: 1.7;
         }
 
         @media (max-width: 768px) {
-            header { padding: 8px 5%; }
-            .logo-img { height: 70px; } /* حجم متجاوب للوجو الكبير */
-            .logo-text { font-size: 1.2rem; }
+            header { padding: 10px 5%; }
+            .logo-img { height: 90px; }
             nav ul { display: none; }
+            .hero-content h1 { font-size: 2.8rem; }
         }
     </style>
 </head>
@@ -278,39 +276,36 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="promo-banner">
-                🚀 تحدي السرعة: احصل على هويتك الرقمية في وقت قياسي وبأعلى جودة عالمية.
-            </div>
-            <h1>القوة الرقمية التي تكتسح السوق</h1>
-            <p>نحن لا نصمم مجرد واجهات، نحن نبني إمبراطوريات بصرية. من البرمجة المتطورة إلى المونتاج السينمائي والاحترافي، نصنع لك حضوراً يفرض نفسه بقوة.</p>
-            <a href="#services" class="btn">اكتشف سر تميزنا الآن <i class="fas fa-bolt" style="margin-right: 12px;"></i></a>
+            <h1>إمبراطورية الإنتاج الرقمي المتكاملة</h1>
+            <p>من البرمجة المعقدة إلى المونتاج السينمائي، نحن نسلح علامتك التجارية بأقوى الأدوات البصرية والتقنية لتسيطر على مجالك بامتياز.</p>
+            <a href="#services" class="btn">اكتشف خدماتنا الجبارة <i class="fas fa-bolt" style="margin-right: 15px;"></i></a>
         </div>
     </section>
 
     <section id="services">
-        <h2 class="section-title">خدماتنا الخارقة</h2>
+        <h2 class="section-title">خدمات Ab Maki الاحترافية</h2>
         
         <div class="services-container">
             
             <div class="service-card">
-                <div class="speed-badge">أداء عالمي</div>
-                <i class="fas fa-laptop-code"></i>
-                <h3>تطوير البرمجيات</h3>
-                <p>بناء منصات ومواقع ذكية بأحدث التقنيات العالمية لضمان أداء خارق، سرعة خيالية، وتجربة مستخدم مثالية.</p>
+                <div class="speed-badge">احترافية برمجية</div>
+                <i class="fas fa-code"></i>
+                <h3>تطوير الويب والتطبيقات</h3>
+                <p>بناء منصات رقمية ذكية بأكواد نظيفة وأداء خارق يضمن لك التواجد القوي والمستدام في سوق المنافسة.</p>
             </div>
 
             <div class="service-card">
-                <div class="speed-badge">خلال 4 ساعات</div>
-                <i class="fas fa-photo-video"></i>
-                <h3>المونتاج القصير</h3>
-                <p>حول لقطاتك إلى تحف فنية تجذب الملايين. مونتاج سينمائي لـ Shorts و Reels جاهز للانطلاق خلال 4 ساعات فقط.</p>
-            </div>
-
-            <div class="service-card">
-                <div class="speed-badge discount-badge">خصم 50%</div>
-                <i class="fas fa-icons"></i>
+                <div class="speed-badge discount-badge">خصم 50% للتأخير</div>
+                <i class="fas fa-palette"></i>
                 <h3>Thumbnails & Posters</h3>
-                <p>تصميم صور مصغرة وبوسترات إعلانية احترافية بأعلى معايير الجذب البصري لضمان أعلى نسب النقر والمشاهدة.</p>
+                <p>تصميم صور مصغرة وبوسترات إعلانية احترافية. استلم تصميمك خلال ساعة واحدة فقط، وإلا ستحصل على خصم 50% فوراً!</p>
+            </div>
+
+            <div class="service-card">
+                <div class="speed-badge">تحدي الـ 4 ساعات</div>
+                <i class="fas fa-video"></i>
+                <h3>المونتاج (قصير & طويل)</h3>
+                <p>مونتاج سينمائي للفيديوهات الطويلة، وفيديوهات الـ Shorts و Reels التي تستلمها جاهزة للنشر خلال 4 ساعات فقط.</p>
             </div>
 
         </div>

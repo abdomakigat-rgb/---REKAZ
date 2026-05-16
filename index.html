@@ -13,7 +13,7 @@
 
     <meta name="description" content="إمبراطورية Ab Maki للإنتاج الرقمي - خدمات مونتاج، برمجة، وتصاميم احترافية في وقت قياسي.">
     <meta name="keywords" content="Ab Maki, مونتاج, برمجة, تصاميم, لوجو, Shorts, Reels, مصر">
-    <link rel="icon" type="image/png" href="https://i.ibb.co/9HvXFf6L/1000052597.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/pBTrM2QM/1000052597.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -47,6 +47,38 @@
             color: var(--pure-white);
             line-height: 1.5;
             overflow-x: hidden;
+        }
+
+        /* تنسيق زر التثبيت العائم */
+        #installApp {
+            display: none; /* مخفي افتراضياً ويظهر بالجافا سكربت */
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            background: var(--main-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(230, 0, 0, 0.4);
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        #installApp:hover {
+            transform: scale(1.1);
+            background: #ff1a1a;
         }
 
         /* هيدر الموقع - اللوجو الجديد */
@@ -125,30 +157,6 @@
             transition: 0.3s;
         }
 
-        /* زر التثبيت العائم */
-        #installBtn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 999;
-            background: var(--main-red);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(230, 0, 0, 0.4);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
         /* الواجهة الرئيسية - Hero Section */
         .hero {
             height: 100vh;
@@ -171,7 +179,7 @@
             transform: translate(-50%, -50%);
             width: 80%;
             height: 80%;
-            background: url('https://i.ibb.co/9HvXFf6L/1000052597.png') no-repeat center;
+            background: url('https://i.ibb.co/pBTrM2QM/1000052597.png') no-repeat center;
             background-size: contain;
             opacity: 0.05;
             z-index: 0;
@@ -380,13 +388,13 @@
 </head>
 <body>
 
-    <button id="installBtn"><i class="fas fa-download"></i> تثبيت التطبيق</button>
+    <button id="installApp"><i class="fas fa-download"></i> تثبيت التطبيق</button>
 
     <header>
         <nav>
             <a href="#home" class="logo-container">
-                <img src="https://i.ibb.co/9HvXFf6L/1000052597.png" alt="Ab Maki Group Logo" class="logo-img">
-                <div class="logo-text">Ab Maki <span style="color: var(--main-red);">جــروب</span></div>
+                <img src="https://i.ibb.co/pBTrM2QM/1000052597.png" alt="Ab Maki Group Logo" class="logo-img">
+                <div class="logo-text">Ab Maki <span>Group</span></div>
             </a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
@@ -402,7 +410,7 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>إمبراطورية الإنتاج الرقمي</h1>
+            <h1>اب مـــكــي <span style="color: var(--main-red);">جــروب</span></h1>
             <p>من البرمجة المعقدة إلى المونتاج السينمائي، نحن نسلح علامتك التجارية بأقوى الأدوات البصرية والتقنية لتسيطر على مجالك بامتياز.</p>
             <a href="#services" class="btn">اكتشف خدماتنا <i class="fas fa-bolt" style="margin-right: 10px;"></i></a>
         </div>
@@ -464,8 +472,8 @@
     </section>
 
     <footer>
-        <img src="https://i.ibb.co/9HvXFf6L/1000052597.png" alt="Ab Maki Logo" class="footer-logo">
-        <p>© 2026 جميع الحقوق محفوظة لـ <span>Ab Maki <span style="color: var(--main-red);">جــروب</span></span></p>
+        <img src="https://i.ibb.co/pBTrM2QM/1000052597.png" alt="Ab Maki Logo" class="footer-logo">
+        <p>© 2026 جميع الحقوق محفوظة لـ <span>Ab Maki Group</span></p>
     </footer>
 
     <script>
@@ -478,14 +486,15 @@
             });
         }
 
-        // كود زر التثبيت الاحترافي
+        // كود زر التثبيت الذكي
         let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
+        const installBtn = document.getElementById('installApp');
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installBtn.style.display = 'block';
+            // إظهار الزر فقط إذا لم يكن التطبيق مثبتاً
+            installBtn.style.display = 'flex';
         });
 
         installBtn.addEventListener('click', async () => {
@@ -493,18 +502,19 @@
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 if (outcome === 'accepted') {
-                    installBtn.style.display = 'none';
+                    console.log('User accepted the install prompt');
                 }
                 deferredPrompt = null;
+                installBtn.style.display = 'none';
             }
         });
 
         window.addEventListener('appinstalled', () => {
             installBtn.style.display = 'none';
-            console.log('PWA installed');
+            console.log('PWA was installed');
         });
 
-        // كود قائمة الموبايل
+        // كود القائمة
         const menuBtn = document.getElementById('menuToggle');
         const navLinks = document.querySelector('.nav-links');
         const icon = menuBtn.querySelector('i');

@@ -9,13 +9,13 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://i.ibb.co/9HvXFf6L/1000052597.png",
+      "src": "https://i.ibb.co/pBTrM2QM/image.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://i.ibb.co/9HvXFf6L/1000052597.png",
+      "src": "https://i.ibb.co/pBTrM2QM/image.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -23,7 +23,7 @@
   ],
   "screenshots": [
     {
-      "src": "https://i.ibb.co/9HvXFf6L/1000052597.png",
+      "src": "https://i.ibb.co/pBTrM2QM/image.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",

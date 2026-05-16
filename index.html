@@ -21,7 +21,6 @@
             --pure-white: #ffffff;
             --gray-text: #b3b3b3;
             --accent-glow: rgba(230, 0, 0, 0.6);
-            --speed-blue: #00d4ff;
         }
 
         * {
@@ -35,14 +34,14 @@
         body {
             background-color: var(--dark-black);
             color: var(--pure-white);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
         }
 
-        /* هيدر الموقع - تكبير اللوجو ليكون جباراً */
+        /* هيدر الموقع - اللوجو يبقى كبيراً */
         header {
             background: #ffffff;
-            padding: 10px 8%; 
+            padding: 5px 8%; 
             position: fixed;
             width: 100%;
             top: 0;
@@ -52,7 +51,7 @@
             box-shadow: 0 4px 30px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            height: 110px;
+            height: 100px; /* تقليل بسيط لارتفاع الهيدر مع الحفاظ على اللوجو */
         }
 
         nav {
@@ -65,63 +64,54 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             text-decoration: none;
             z-index: 1001;
         }
 
         .logo-img {
-            height: 130px; 
+            height: 120px; /* الحفاظ على اللوجو كبيراً */
             width: auto;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
         }
         
         .logo-img:hover {
-            transform: scale(1.1) rotate(2deg); 
+            transform: scale(1.05) rotate(2deg); 
         }
 
         .logo-text {
-            font-size: 1.6rem;
+            font-size: 1.4rem; /* تصغير طفيف للنص */
             color: #000000; 
             font-weight: bold;
-            letter-spacing: -0.5px;
         }
 
-        .logo-text span {
-            color: var(--main-red); 
-        }
+        .logo-text span { color: var(--main-red); }
 
-        /* القائمة الأساسية */
         .nav-links {
             display: flex;
             list-style: none;
         }
 
-        .nav-links li {
-            margin-right: 30px;
-        }
+        .nav-links li { margin-right: 25px; }
 
         .nav-links li a {
             color: #000000; 
             text-decoration: none;
-            font-size: 1.15rem;
+            font-size: 1rem; /* تصغير الروابط */
             font-weight: bold;
             transition: 0.3s ease;
-            position: relative;
         }
 
-        .nav-links li a:hover {
-            color: var(--main-red);
-        }
+        .nav-links li a:hover { color: var(--main-red); }
 
-        /* تصميم المنيو للموبايل */
         .menu-btn {
             display: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #000;
             cursor: pointer;
             z-index: 1001;
+            transition: 0.3s;
         }
 
         /* الواجهة الرئيسية - Hero Section */
@@ -132,137 +122,100 @@
             justify-content: center;
             text-align: center;
             padding: 0 20px;
-            background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)), 
-                        radial-gradient(circle at center, #800000 0%, var(--dark-black) 95%);
-            position: relative;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
+            background: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.95)), 
+                        radial-gradient(circle at center, #600000 0%, var(--dark-black) 100%);
         }
 
         .hero-content h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
-            margin-bottom: 30px;
-            text-shadow: 0px 0px 50px var(--accent-glow);
-            line-height: 1.1;
-            font-weight: 900;
+            font-size: clamp(2.2rem, 8vw, 4.2rem); /* تصغير العنوان الرئيسي */
+            margin-bottom: 20px;
+            text-shadow: 0px 0px 30px var(--accent-glow);
+            line-height: 1.2;
         }
 
         .hero-content p {
-            font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+            font-size: clamp(0.95rem, 2.5vw, 1.3rem); /* تصغير الوصف */
             color: var(--gray-text);
-            margin-bottom: 50px;
-            max-width: 950px;
+            margin-bottom: 40px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 500;
         }
 
         .btn {
             display: inline-block;
-            padding: 20px 60px;
+            padding: 15px 45px; /* تصغير الزر */
             background-color: var(--main-red);
             color: var(--pure-white);
             text-decoration: none;
-            font-size: 1.5rem;
-            border-radius: 60px;
+            font-size: 1.1rem;
+            border-radius: 50px;
             font-weight: bold;
-            box-shadow: 0 10px 40px var(--accent-glow);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px var(--accent-glow);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
         }
 
         .btn:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px var(--accent-glow);
-            background: #ff0000;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--accent-glow);
         }
 
         /* قسم الخدمات */
         #services {
-            padding: 120px 8%;
+            padding: 100px 8%;
             text-align: center;
-            background: var(--dark-black);
         }
 
         .section-title {
-            font-size: 3.5rem;
-            margin-bottom: 70px;
-            color: var(--pure-white);
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+            font-size: 2.5rem; /* تصغير عنوان القسم */
+            margin-bottom: 50px;
         }
 
         .services-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .service-card {
             background: var(--card-bg);
-            padding: 65px 35px;
-            border-radius: 40px;
+            padding: 50px 30px; /* تصغير البطاقة */
+            border-radius: 30px;
             border: 1px solid #222;
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.4s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .service-card:hover {
             border-color: var(--main-red);
-            transform: translateY(-20px);
-            background: linear-gradient(145deg, #1e1e1e, #0a0a0a);
-            box-shadow: 0 30px 60px rgba(230,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(230,0,0,0.15);
         }
 
         .speed-badge {
             position: absolute;
             top: -10px;
-            right: 25px;
+            right: 20px;
             background: var(--main-red);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            padding: 6px 15px;
+            border-radius: 10px;
+            font-size: 0.8rem;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(230,0,0,0.4);
-            z-index: 2;
         }
 
-        .discount-badge {
-            background: #ffcc00;
-            color: #000;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        .discount-badge { background: #ffcc00; color: #000; }
 
         .service-card i {
-            font-size: 4.8rem;
-            margin-bottom: 30px;
+            font-size: 3.5rem; /* تصغير الأيقونات */
+            margin-bottom: 25px;
             color: var(--main-red);
-            display: block;
-            filter: drop-shadow(0 0 15px var(--accent-glow));
         }
 
-        .service-card h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
 
-        .service-card p {
-            color: var(--gray-text);
-            font-size: 1.2rem;
-            line-height: 1.7;
-        }
+        .service-card p { font-size: 1rem; color: var(--gray-text); }
 
-        /* استعلامات الوسائط (Mobile) */
+        /* انيميشن قائمة الموبايل الاحترافية */
         @media (max-width: 992px) {
             .menu-btn { display: block; }
             .nav-links {
@@ -270,20 +223,37 @@
                 top: 0;
                 right: -100%;
                 height: 100vh;
-                width: 70%;
-                background: #fff;
+                width: 100%; /* تغطية كاملة للشاشة */
+                background: rgba(255, 255, 255, 0.98);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                transition: 0.5s ease;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+                opacity: 0;
             }
-            .nav-links.active { right: 0; }
-            .nav-links li { margin: 20px 0; }
-            .nav-links li a { font-size: 1.5rem; }
-            header { height: 90px; }
-            .logo-img { height: 90px; }
-            .hero-content h1 { font-size: 2.8rem; }
+            .nav-links.active {
+                right: 0;
+                opacity: 1;
+            }
+            .nav-links li {
+                margin: 15px 0;
+                transform: translateX(50px);
+                transition: 0.4s ease;
+                opacity: 0;
+            }
+            .nav-links.active li {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            /* تأخير ظهور الروابط لإعطاء تأثير انسيابي */
+            .nav-links.active li:nth-child(1) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.4s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.5s; }
+            
+            .nav-links li a { font-size: 1.8rem; }
+            .logo-img { height: 80px; }
+            header { height: 80px; }
         }
     </style>
 </head>
@@ -301,7 +271,7 @@
                 <li><a href="#portfolio">أعمالنا</a></li>
                 <li><a href="#contact">تواصل معنا</a></li>
             </ul>
-            <div class="menu-btn">
+            <div class="menu-btn" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
@@ -309,64 +279,61 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>إمبراطورية الإنتاج الرقمي المتكاملة</h1>
+            <h1>إمبراطورية الإنتاج الرقمي</h1>
             <p>من البرمجة المعقدة إلى المونتاج السينمائي، نحن نسلح علامتك التجارية بأقوى الأدوات البصرية والتقنية لتسيطر على مجالك بامتياز.</p>
-            <a href="#services" class="btn">اكتشف خدماتنا الجبارة <i class="fas fa-bolt" style="margin-right: 15px;"></i></a>
+            <a href="#services" class="btn">اكتشف خدماتنا <i class="fas fa-bolt" style="margin-right: 10px;"></i></a>
         </div>
     </section>
 
     <section id="services">
-        <h2 class="section-title">خدمات Ab Maki الاحترافية</h2>
-        
+        <h2 class="section-title">خدماتنا الاحترافية</h2>
         <div class="services-container">
-            
             <div class="service-card">
                 <div class="speed-badge">احترافية برمجية</div>
                 <i class="fas fa-code"></i>
                 <h3>تطوير الويب والتطبيقات</h3>
-                <p>بناء منصات رقمية ذكية بأكواد نظيفة وأداء خارق يضمن لك التواجد القوي والمستدام في سوق المنافسة.</p>
+                <p>بناء منصات رقمية ذكية بأكواد نظيفة وأداء خارق يضمن لك التواجد القوي والمستدام.</p>
             </div>
-
             <div class="service-card">
                 <div class="speed-badge discount-badge">خصم 50% للتأخير</div>
                 <i class="fas fa-palette"></i>
                 <h3>Thumbnails & Posters</h3>
-                <p>تصميم صور مصغرة وبوسترات إعلانية احترافية. استلم تصميمك خلال ساعة واحدة فقط، وإلا ستحصل على خصم 50% فوراً!</p>
+                <p>استلم تصميمك خلال ساعة واحدة فقط، وإلا ستحصل على خصم 50% فوراً!</p>
             </div>
-
             <div class="service-card">
                 <div class="speed-badge">تحدي الـ 4 ساعات</div>
                 <i class="fas fa-video"></i>
                 <h3>المونتاج (قصير & طويل)</h3>
-                <p>مونتاج سينمائي للفيديوهات الطويلة، وفيديوهات الـ Shorts و Reels التي تستلمها جاهزة للنشر خلال 4 ساعات فقط.</p>
+                <p>فيديوهات الـ Shorts و Reels جاهزة للنشر خلال 4 ساعات فقط، بجودة سينمائية مذهلة.</p>
             </div>
-
         </div>
     </section>
 
     <script>
-        // كود تشغيل المنيو في الموبايل
-        const menuBtn = document.querySelector('.menu-btn');
+        const menuBtn = document.getElementById('menuToggle');
         const navLinks = document.querySelector('.nav-links');
+        const icon = menuBtn.querySelector('i');
 
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // تغيير أيقونة المنيو
-            const icon = menuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+            // تحويل الأيقونة بين Bars و Times مع انيميشن بسيط
+            if (navLinks.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+                menuBtn.style.transform = 'rotate(90deg)';
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+                menuBtn.style.transform = 'rotate(0deg)';
+            }
         });
 
-        // إغلاق المنيو عند الضغط على أي رابط
+        // إغلاق المنيو عند الضغط على الروابط
         document.querySelectorAll('.nav-links li a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                const icon = menuBtn.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
+                icon.classList.replace('fa-times', 'fa-bars');
+                menuBtn.style.transform = 'rotate(0deg)';
             });
         });
     </script>
-
 </body>
 </html>

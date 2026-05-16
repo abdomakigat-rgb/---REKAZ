@@ -42,7 +42,7 @@
         /* هيدر الموقع - تكبير اللوجو ليكون جباراً */
         header {
             background: #ffffff;
-            padding: 15px 8%; 
+            padding: 10px 8%; 
             position: fixed;
             width: 100%;
             top: 0;
@@ -52,6 +52,7 @@
             box-shadow: 0 4px 30px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
+            height: 110px;
         }
 
         nav {
@@ -66,10 +67,11 @@
             align-items: center;
             gap: 15px;
             text-decoration: none;
+            z-index: 1001;
         }
 
         .logo-img {
-            height: 130px; /* تم تكبير اللوجو أكثر ليكون مهيمناً */
+            height: 130px; 
             width: auto;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
@@ -90,25 +92,36 @@
             color: var(--main-red); 
         }
 
-        nav ul {
+        /* القائمة الأساسية */
+        .nav-links {
             display: flex;
             list-style: none;
         }
 
-        nav ul li {
+        .nav-links li {
             margin-right: 30px;
         }
 
-        nav ul li a {
+        .nav-links li a {
             color: #000000; 
             text-decoration: none;
             font-size: 1.15rem;
             font-weight: bold;
             transition: 0.3s ease;
+            position: relative;
         }
 
-        nav ul li a:hover {
+        .nav-links li a:hover {
             color: var(--main-red);
+        }
+
+        /* تصميم المنيو للموبايل */
+        .menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            color: #000;
+            cursor: pointer;
+            z-index: 1001;
         }
 
         /* الواجهة الرئيسية - Hero Section */
@@ -249,10 +262,27 @@
             line-height: 1.7;
         }
 
-        @media (max-width: 768px) {
-            header { padding: 10px 5%; }
+        /* استعلامات الوسائط (Mobile) */
+        @media (max-width: 992px) {
+            .menu-btn { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: #fff;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s ease;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 20px 0; }
+            .nav-links li a { font-size: 1.5rem; }
+            header { height: 90px; }
             .logo-img { height: 90px; }
-            nav ul { display: none; }
             .hero-content h1 { font-size: 2.8rem; }
         }
     </style>
@@ -265,12 +295,15 @@
                 <img src="https://i.ibb.co/tp43qrKw/1000052597.png" alt="Ab Maki Group Logo" class="logo-img">
                 <div class="logo-text">Ab Maki <span>Group</span></div>
             </a>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#services">خدماتنا</a></li>
                 <li><a href="#portfolio">أعمالنا</a></li>
                 <li><a href="#contact">تواصل معنا</a></li>
             </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
         </nav>
     </header>
 
@@ -310,6 +343,30 @@
 
         </div>
     </section>
+
+    <script>
+        // كود تشغيل المنيو في الموبايل
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // تغيير أيقونة المنيو
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // إغلاق المنيو عند الضغط على أي رابط
+        document.querySelectorAll('.nav-links li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -102,6 +102,7 @@
         .nav-links {
             display: flex;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links li { margin-right: 25px; }
@@ -115,6 +116,17 @@
         }
 
         .nav-links li a:hover { color: var(--main-red); }
+
+        /* زر المنيو الخاص بالتثبيت */
+        .menu-install-btn {
+            display: none; /* يظهر بالجافا سكريبت */
+            background: var(--main-red);
+            color: #fff !important;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem !important;
+            box-shadow: 0 4px 10px rgba(230, 0, 0, 0.3);
+        }
 
         .menu-btn {
             display: none;
@@ -440,6 +452,7 @@
             .nav-links li a { font-size: 1.8rem; }
             header { height: 80px; }
             .logo-img { height: 80px; }
+            .menu-install-btn { display: block !important; margin-top: 20px; }
         }
     </style>
 </head>
@@ -449,8 +462,8 @@
         <div class="install-content">
             <img src="https://i.ibb.co/pBTrM2QM/image.png" alt="Ab Maki App" class="install-img">
             <div class="install-text">
-                <h4>انضم للإمبراطورية</h4>
-                <p>أسرع، أقوى، وبدون إنترنت!</p>
+                <h4 id="banner-title">ثبّت منصة الإبداع</h4>
+                <p id="banner-desc">أسرع، أقوى، وبدون إنترنت!</p>
             </div>
         </div>
         <div class="install-actions">
@@ -470,6 +483,7 @@
                 <li><a href="#services">خدماتنا</a></li>
                 <li><a href="#portfolio">أعمالنا</a></li>
                 <li><a href="#contact">تواصل معنا</a></li>
+                <li><a href="javascript:void(0)" class="menu-install-btn" id="menuInstallBtn">تثبيت المنصة</a></li>
             </ul>
             <div class="menu-btn" id="menuToggle">
                 <i class="fas fa-bars"></i>
@@ -555,34 +569,65 @@
             });
         }
 
-        // منطق زر التثبيت المغناطيسي المتطور
+        // منطق زر التثبيت المتطور (أندرويد، كمبيوتر، آيفون)
         let deferredPrompt;
         const installBanner = document.getElementById('install-banner');
         const installBtn = document.getElementById('installBtn');
+        const menuInstallBtn = document.getElementById('menuInstallBtn');
         const closeInstall = document.getElementById('closeInstall');
+        const bannerTitle = document.getElementById('banner-title');
+        const bannerDesc = document.getElementById('banner-desc');
+
+        // اكتشاف إذا كان الجهاز آيفون
+        const isIos = () => {
+            const userAgent = window.navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod/.test(userAgent);
+        };
+
+        const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // إظهار البنر بعد 3 ثواني لإعطاء طابع احترافي
+            
+            // إظهار الأزرار
+            menuInstallBtn.style.display = 'block';
             setTimeout(() => {
                 installBanner.classList.add('show');
                 installBanner.style.display = 'flex';
             }, 3000);
         });
 
-        installBtn.addEventListener('click', () => {
+        // التعامل مع آيفون يدوياً
+        if (isIos() && !isInStandaloneMode()) {
+            menuInstallBtn.style.display = 'block';
+            bannerTitle.innerText = "ثبّت التطبيق على iPhone";
+            bannerDesc.innerText = "اضغط على زر المشاركة ثم 'إضافة للشاشة الرئيسية'";
+            installBtn.style.display = 'none'; // لا يوجد تثبيت تلقائي في آيفون
+            
+            setTimeout(() => {
+                installBanner.classList.add('show');
+                installBanner.style.display = 'flex';
+            }, 3000);
+        }
+
+        const triggerInstall = () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
+                        installBanner.classList.remove('show');
+                        menuInstallBtn.style.display = 'none';
                     }
-                    installBanner.classList.remove('show');
                     deferredPrompt = null;
                 });
+            } else if (isIos()) {
+                alert("لتثبيت التطبيق على آيفون:\n1. اضغط على زر المشاركة في متصفح Safari\n2. اختر 'Add to Home Screen' أو 'إضافة للشاشة الرئيسية'.");
             }
-        });
+        };
+
+        installBtn.addEventListener('click', triggerInstall);
+        menuInstallBtn.addEventListener('click', triggerInstall);
 
         closeInstall.addEventListener('click', () => {
             installBanner.classList.remove('show');
@@ -590,10 +635,10 @@
 
         window.addEventListener('appinstalled', () => {
             installBanner.classList.remove('show');
-            console.log('App was installed');
+            menuInstallBtn.style.display = 'none';
         });
 
-        // الكود البرمجي للقائمة الجانبية (Mobile Menu)
+        // كود المنيو
         const menuBtn = document.getElementById('menuToggle');
         const navLinks = document.querySelector('.nav-links');
         const icon = menuBtn.querySelector('i');
@@ -610,10 +655,12 @@
         });
 
         document.querySelectorAll('.nav-links li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                icon.classList.replace('fa-times', 'fa-bars');
-                menuBtn.style.transform = 'rotate(0deg)';
+            link.addEventListener('click', (e) => {
+                if(e.target.id !== 'menuInstallBtn') {
+                    navLinks.classList.remove('active');
+                    icon.classList.replace('fa-times', 'fa-bars');
+                    menuBtn.style.transform = 'rotate(0deg)';
+                }
             });
         });
     </script>

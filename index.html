@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ab Maki Group | القوة والتميز</title>
     
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e60000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/9HvXFf6L/1000052597.png">
+
     <meta name="description" content="إمبراطورية Ab Maki للإنتاج الرقمي - خدمات مونتاج، برمجة، وتصاميم احترافية في وقت قياسي.">
     <meta name="keywords" content="Ab Maki, مونتاج, برمجة, تصاميم, لوجو, Shorts, Reels, مصر">
     <link rel="icon" type="image/png" href="https://i.ibb.co/9HvXFf6L/1000052597.png">
@@ -370,7 +376,7 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>اب مـــكــي جــروب </h1>
+            <h1>إمبراطورية الإنتاج الرقمي</h1>
             <p>من البرمجة المعقدة إلى المونتاج السينمائي، نحن نسلح علامتك التجارية بأقوى الأدوات البصرية والتقنية لتسيطر على مجالك بامتياز.</p>
             <a href="#services" class="btn">اكتشف خدماتنا <i class="fas fa-bolt" style="margin-right: 10px;"></i></a>
         </div>
@@ -437,6 +443,15 @@
     </footer>
 
     <script>
+        // كود تشغيل الـ Service Worker لربط الـ Manifest
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('Service Worker Registered'))
+                .catch(err => console.log('Service Worker Failed', err));
+            });
+        }
+
         const menuBtn = document.getElementById('menuToggle');
         const navLinks = document.querySelector('.nav-links');
         const icon = menuBtn.querySelector('i');

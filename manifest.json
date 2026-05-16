@@ -7,6 +7,10 @@
   "background_color": "#0a0a0a",
   "theme_color": "#e60000",
   "orientation": "portrait",
+  "scope": "/",
+  "lang": "ar-EG",
+  "dir": "rtl",
+  "categories": ["business", "productivity", "graphics_design"],
   "icons": [
     {
       "src": "https://i.ibb.co/pBTrM2QM/image.png",
@@ -28,6 +32,13 @@
       "type": "image/png",
       "form_factor": "wide",
       "label": "Ab Maki Group Home"
+    },
+    {
+      "src": "https://i.ibb.co/pBTrM2QM/image.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Ab Maki Group Mobile"
     }
   ]
 }

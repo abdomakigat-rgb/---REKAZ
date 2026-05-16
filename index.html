@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#e60000">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/9HvXFf6L/1000052597.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/pBTrM2QM/1000052597.png">
 
     <meta name="description" content="إمبراطورية Ab Maki للإنتاج الرقمي - خدمات مونتاج، برمجة، وتصاميم احترافية في وقت قياسي.">
     <meta name="keywords" content="Ab Maki, مونتاج, برمجة, تصاميم, لوجو, Shorts, Reels, مصر">
@@ -123,6 +123,30 @@
             cursor: pointer;
             z-index: 1001;
             transition: 0.3s;
+        }
+
+        /* زر التثبيت العائم */
+        #installBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+            background: var(--main-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(230, 0, 0, 0.4);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
         }
 
         /* الواجهة الرئيسية - Hero Section */
@@ -356,11 +380,13 @@
 </head>
 <body>
 
+    <button id="installBtn"><i class="fas fa-download"></i> تثبيت التطبيق</button>
+
     <header>
         <nav>
             <a href="#home" class="logo-container">
                 <img src="https://i.ibb.co/9HvXFf6L/1000052597.png" alt="Ab Maki Group Logo" class="logo-img">
-                <div class="logo-text">Ab Maki <span>Group</span></div>
+                <div class="logo-text">Ab Maki <span style="color: var(--main-red);">جــروب</span></div>
             </a>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
@@ -376,7 +402,7 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>اب مــكــي جــروب</h1>
+            <h1>إمبراطورية الإنتاج الرقمي</h1>
             <p>من البرمجة المعقدة إلى المونتاج السينمائي، نحن نسلح علامتك التجارية بأقوى الأدوات البصرية والتقنية لتسيطر على مجالك بامتياز.</p>
             <a href="#services" class="btn">اكتشف خدماتنا <i class="fas fa-bolt" style="margin-right: 10px;"></i></a>
         </div>
@@ -439,11 +465,11 @@
 
     <footer>
         <img src="https://i.ibb.co/9HvXFf6L/1000052597.png" alt="Ab Maki Logo" class="footer-logo">
-        <p>© 2026 جميع الحقوق محفوظة لـ <span>Ab Maki Group</span></p>
+        <p>© 2026 جميع الحقوق محفوظة لـ <span>Ab Maki <span style="color: var(--main-red);">جــروب</span></span></p>
     </footer>
 
     <script>
-        // كود تشغيل الـ Service Worker لربط الـ Manifest
+        // كود تشغيل الـ Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
@@ -452,6 +478,33 @@
             });
         }
 
+        // كود زر التثبيت الاحترافي
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installBtn.style.display = 'none';
+            console.log('PWA installed');
+        });
+
+        // كود قائمة الموبايل
         const menuBtn = document.getElementById('menuToggle');
         const navLinks = document.querySelector('.nav-links');
         const icon = menuBtn.querySelector('i');

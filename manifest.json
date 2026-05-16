@@ -2,15 +2,19 @@
   "name": "Ab Maki Group | القوة والتميز",
   "short_name": "Ab Maki",
   "description": "إمبراطورية الإنتاج الرقمي - خدمات مونتاج، برمجة، وتصاميم احترافية.",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#e60000",
   "orientation": "portrait",
-  "scope": "/",
+  "scope": "./",
   "lang": "ar-EG",
   "dir": "rtl",
-  "categories": ["business", "productivity", "graphics_design"],
+  "categories": [
+    "business",
+    "productivity",
+    "graphics_design"
+  ],
   "icons": [
     {
       "src": "https://i.ibb.co/pBTrM2QM/image.png",
@@ -31,14 +35,14 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Ab Maki Group Home"
+      "label": "واجهة إمبراطورية Ab Maki على الكمبيوتر"
     },
     {
       "src": "https://i.ibb.co/pBTrM2QM/image.png",
       "sizes": "720x1280",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Ab Maki Group Mobile"
+      "label": "واجهة إمبراطورية Ab Maki على الهاتف"
     }
   ]
 }

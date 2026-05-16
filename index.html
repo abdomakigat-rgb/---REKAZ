@@ -68,8 +68,9 @@
             text-decoration: none;
         }
 
+        /* تكبير اللوجو فقط بناءً على الطلب */
         .logo-img {
-            height: 75px; 
+            height: 100px; 
             width: auto;
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -79,7 +80,7 @@
         }
 
         .logo-text {
-            font-size: 1.5rem; /* تم تصغير النص لزيادة الاحترافية */
+            font-size: 1.5rem; /* الحفاظ على حجم النص لزيادة الاحترافية */
             color: #000000; 
             font-weight: bold;
             letter-spacing: -0.5px;
@@ -132,6 +133,7 @@
             font-size: clamp(2.8rem, 9vw, 5.2rem);
             margin-bottom: 25px;
             text-shadow: 0px 0px 40px var(--accent-glow);
+            line-height: 1.1;
         }
 
         /* تحدي الخصم */
@@ -226,6 +228,12 @@
             box-shadow: 0 5px 15px rgba(230,0,0,0.4);
         }
 
+        /* تنسيق خاص لشارة الخصم */
+        .discount-badge {
+            background: #ffcc00;
+            color: #000;
+        }
+
         .service-card i {
             font-size: 4.5rem;
             margin-bottom: 30px;
@@ -245,7 +253,7 @@
 
         @media (max-width: 768px) {
             header { padding: 8px 5%; }
-            .logo-img { height: 55px; }
+            .logo-img { height: 70px; } /* حجم متجاوب للوجو الكبير */
             .logo-text { font-size: 1.2rem; }
             nav ul { display: none; }
         }
@@ -271,38 +279,38 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="promo-banner">
-                🚀 تحدي الساعة: لو مستلمتش الصورة خلال ساعة <span>هتاخد خصم 50% فوراً!</span>
+                🚀 تحدي السرعة: احصل على هويتك الرقمية في وقت قياسي وبأعلى جودة عالمية.
             </div>
-            <h1>إبداع بلا حدود في عالم الرقميات</h1>
-            <p>نحن لا نصمم فقط، بل نبني هويات بصرية تكتسح السوق. من البرمجة المتطورة إلى المونتاج السينمائي وتصميم البوسترات التي تخطف الأنظار في وقت قياسي.</p>
-            <a href="#services" class="btn">ابدأ رحلة التميز الآن <i class="fas fa-bolt" style="margin-right: 12px;"></i></a>
+            <h1>القوة الرقمية التي تكتسح السوق</h1>
+            <p>نحن لا نصمم مجرد واجهات، نحن نبني إمبراطوريات بصرية. من البرمجة المتطورة إلى المونتاج السينمائي والاحترافي، نصنع لك حضوراً يفرض نفسه بقوة.</p>
+            <a href="#services" class="btn">اكتشف سر تميزنا الآن <i class="fas fa-bolt" style="margin-right: 12px;"></i></a>
         </div>
     </section>
 
     <section id="services">
-        <h2 class="section-title">خدماتنا الجبارة</h2>
+        <h2 class="section-title">خدماتنا الخارقة</h2>
         
         <div class="services-container">
             
             <div class="service-card">
-                <div class="speed-badge">احترافية مطلقة</div>
+                <div class="speed-badge">أداء عالمي</div>
                 <i class="fas fa-laptop-code"></i>
                 <h3>تطوير البرمجيات</h3>
-                <p>بناء مواقع وتطبيقات ذكية بأحدث التقنيات العالمية لضمان أداء خارق وتجربة مستخدم لا تُنسى.</p>
+                <p>بناء منصات ومواقع ذكية بأحدث التقنيات العالمية لضمان أداء خارق، سرعة خيالية، وتجربة مستخدم مثالية.</p>
             </div>
 
             <div class="service-card">
                 <div class="speed-badge">خلال 4 ساعات</div>
                 <i class="fas fa-photo-video"></i>
                 <h3>المونتاج القصير</h3>
-                <p>مونتاج فيديوهات Shorts و Reels بلمسة سينمائية تجذب الملايين.. استلم مشروعك جاهزاً خلال 4 ساعات فقط.</p>
+                <p>حول لقطاتك إلى تحف فنية تجذب الملايين. مونتاج سينمائي لـ Shorts و Reels جاهز للانطلاق خلال 4 ساعات فقط.</p>
             </div>
 
             <div class="service-card">
-                <div class="speed-badge">خلال ساعة واحدة</div>
+                <div class="speed-badge discount-badge">خصم 50%</div>
                 <i class="fas fa-icons"></i>
                 <h3>Thumbnails & Posters</h3>
-                <p>تصميم صور مصغرة وبوسترات إعلانية احترافية تعزز حضورك الرقمي وتضمن لك أعلى نسب النقر والمشاهدة.</p>
+                <p>تصميم صور مصغرة وبوسترات إعلانية احترافية بأعلى معايير الجذب البصري لضمان أعلى نسب النقر والمشاهدة.</p>
             </div>
 
         </div>

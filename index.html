@@ -21,6 +21,7 @@
             --pure-white: #ffffff;
             --gray-text: #b3b3b3;
             --accent-glow: rgba(230, 0, 0, 0.6);
+            --speed-blue: #00d4ff;
         }
 
         * {
@@ -38,10 +39,10 @@
             overflow-x: hidden;
         }
 
-        /* هيدر الموقع والقائمة - تم تعديله للون الأبيض */
+        /* هيدر الموقع والقائمة */
         header {
             background: #ffffff;
-            padding: 15px 8%; /* زيادة الحشو ليتناسب مع اللوجو الأكبر */
+            padding: 15px 8%; 
             position: fixed;
             width: 100%;
             top: 0;
@@ -67,9 +68,8 @@
             text-decoration: none;
         }
 
-        /* تكبير اللوجو ومن غير إطار */
         .logo-img {
-            height: 90px; /* تم تكبير اللوجو من 60px إلى 90px */
+            height: 100px; /* تم تكبير اللوجو ليكون جباراً */
             width: auto;
             border-radius: 0; 
             border: none; 
@@ -78,19 +78,18 @@
         }
         
         .logo-img:hover {
-            transform: scale(1.15) rotate(5deg); 
+            transform: scale(1.1) rotate(-3deg); 
         }
 
-        /* تعديل ألوان الاسم في الهيدر */
         .logo-text {
-            font-size: 2rem; /* تكبير الخط ليتناسب مع اللوجو */
-            color: #000000; /* Ab Maki بالأسود */
+            font-size: 2.2rem; 
+            color: #000000; 
             font-weight: bold;
             letter-spacing: -1px;
         }
 
         .logo-text span {
-            color: var(--main-red); /* Group بالأحمر */
+            color: var(--main-red); 
         }
 
         nav ul {
@@ -103,7 +102,7 @@
         }
 
         nav ul li a {
-            color: #000000; /* الروابط بالأسود لتناسب الهيدر الأبيض */
+            color: #000000; 
             text-decoration: none;
             font-size: 1.2rem;
             font-weight: bold;
@@ -138,20 +137,9 @@
             justify-content: center;
             text-align: center;
             padding: 0 20px;
-            background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)), 
-                        radial-gradient(circle at center, #660000 0%, var(--dark-black) 85%);
+            background: linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,0.8)), 
+                        radial-gradient(circle at center, #800000 0%, var(--dark-black) 90%);
             position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-            opacity: 0.4;
         }
 
         .hero-content {
@@ -172,6 +160,25 @@
             line-height: 1.1;
         }
 
+        .speed-badge {
+            background: var(--main-red);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            box-shadow: 0 0 20px var(--accent-glow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px var(--main-red); }
+            100% { transform: scale(1); }
+        }
+
         .hero-content p {
             font-size: clamp(1.1rem, 4vw, 1.8rem);
             color: var(--pure-white);
@@ -179,7 +186,6 @@
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0.9;
         }
 
         .btn {
@@ -199,7 +205,7 @@
         .btn:hover {
             background-color: transparent;
             border-color: var(--main-red);
-            transform: translateY(-10px) scale(1.05);
+            transform: translateY(-10px);
             box-shadow: 0 20px 50px var(--accent-glow);
         }
 
@@ -208,25 +214,21 @@
             padding: 150px 8%;
             text-align: center;
             background: var(--dark-black);
-            position: relative;
         }
 
         .section-title {
             font-size: 3.5rem;
             color: var(--pure-white);
-            margin-bottom: 100px;
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
         }
 
-        .section-title::after {
-            content: '';
+        .section-subtitle {
+            color: var(--gray-text);
+            font-size: 1.3rem;
+            margin-bottom: 80px;
             display: block;
-            width: 120%;
-            height: 6px;
-            background: linear-gradient(90deg, transparent, var(--main-red), transparent);
-            margin: 20px auto 0 -10%;
-            border-radius: 10px;
         }
 
         .services-container {
@@ -240,26 +242,22 @@
             padding: 70px 40px;
             border-radius: 35px;
             border: 1px solid #333;
-            transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: 0.6s ease;
             position: relative;
-            overflow: hidden;
             z-index: 1;
         }
 
-        .service-card::before {
-            content: '';
+        .speed-tag {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--main-red);
-            transform: scaleX(0);
-            transition: 0.5s;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
+            top: 20px;
+            left: 20px;
+            background: rgba(230, 0, 0, 0.1);
+            color: var(--main-red);
+            border: 1px solid var(--main-red);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
 
         .service-card:hover {
@@ -279,36 +277,18 @@
         .service-card h3 {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: var(--pure-white);
-            text-transform: uppercase;
         }
 
         .service-card p {
             color: var(--gray-text);
             font-size: 1.2rem;
-            line-height: 1.8;
         }
 
-        /* التجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
-            header {
-                padding: 10px 5%;
-            }
-            .logo-img {
-                height: 60px;
-            }
-            .logo-text {
-                font-size: 1.5rem;
-            }
-            nav ul {
-                display: none;
-            }
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            .section-title {
-                font-size: 2.5rem;
-            }
+            header { padding: 10px 5%; }
+            .logo-img { height: 70px; }
+            nav ul { display: none; }
+            .hero-content h1 { font-size: 3rem; }
         }
     </style>
 </head>
@@ -331,32 +311,38 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
+            <div class="speed-badge"><i class="fas fa-bolt"></i> أسرع خدمة في العالم</div>
             <h1>إبداع بلا حدود في عالم الرقميات</h1>
-            <p>نجمع بين قوة البرمجة، فن المونتاج، وجمال التصميم لنصنع لك هوية رقمية متكاملة وقوية.</p>
+            <p>نجمع بين قوة البرمجة، فن المونتاج، وجمال التصميم لنصنع لك هوية رقمية متكاملة وقوية في وقت قياسي.</p>
             <a href="#services" class="btn">ابدأ رحلتك معنا <i class="fas fa-chevron-left" style="font-size: 1rem; margin-right: 15px;"></i></a>
         </div>
     </section>
 
     <section id="services">
         <h2 class="section-title">ماذا نقدم؟</h2>
+        <span class="section-subtitle">إليك باقة خدماتنا التي تجمع بين الجودة العالمية والسرعة الخارقة</span>
+        
         <div class="services-container">
             
             <div class="service-card">
+                <div class="speed-tag">تنفيذ احترافي</div>
                 <i class="fas fa-laptop-code"></i>
                 <h3>تطوير البرمجيات</h3>
                 <p>حلول برمجية متطورة، بناء مواقع ويب سريعة وتطبيقات ذكية تلبي طموحاتك وتنافس عالمياً.</p>
             </div>
 
             <div class="service-card">
+                <div class="speed-tag">خلال 4 ساعات</div>
                 <i class="fas fa-clapperboard"></i>
-                <h3>المونتاج وإنتاج الفيديو</h3>
-                <p>مونتاج سينمائي احترافي، تصحيح ألوان، وإضافة مؤثرات بصرية تجعل من فيديوهاتك عملاً فنياً.</p>
+                <h3>المونتاج القصير</h3>
+                <p>استلم فيديوهات الـ Shorts والـ Reels خلال 4 ساعات فقط، بمونتاج سينمائي يجذب الملايين.</p>
             </div>
 
             <div class="service-card">
+                <div class="speed-tag">خلال ساعة واحدة</div>
                 <i class="fas fa-wand-magic-sparkles"></i>
                 <h3>تصميم الـ Thumbnails</h3>
-                <p>تصاميم جذابة تخطف الأنظار وترفع نسبة النقر (CTR)، مبنية على استراتيجيات بصرية مدروسة.</p>
+                <p>تصاميم 3D جذابة تخطف الأنظار، جاهزة خلال ساعة واحدة فقط لرفع نسبة النقر على فيديوهاتك.</p>
             </div>
 
         </div>

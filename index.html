@@ -536,6 +536,40 @@
             box-shadow: 0 0 15px rgba(230,0,0,0.2);
         }
 
+        /* تنسيق حقل رفع الصورة الجديد */
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            border: 2px dashed #333;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #0a0a0a;
+        }
+        .file-upload-wrapper:hover {
+            border-color: var(--main-red);
+            background: #1a0000;
+        }
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-upload-wrapper span {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+        }
+        .file-upload-wrapper i {
+            margin-left: 10px;
+            color: var(--main-red);
+        }
+
         .submit-order {
             background: var(--main-red);
             color: #fff;
@@ -712,10 +746,10 @@
                 <p>بناء منصات رقمية ذكية بأكواد نظيفة وأداء خارق يضمن لك التواجد القوي والمستدام.</p>
             </div>
             <div class="service-card">
-                <div class="speed-badge discount-badge">خصم 50% للتأخير</div>
-                <i class="fas fa-palette"></i>
-                <h3>Thumbnails & Posters</h3>
-                <p>استلم تصميمك خلال ساعة واحدة فقط، وإلا ستحصل على خصم 50% فوراً!</p>
+                <div class="speed-badge">شامل وسريع</div>
+                <i class="fas fa-tasks"></i>
+                <h3>إدارة الصفحات والقنوات</h3>
+                <p>تنمية حساباتك على السوشيال ميديا وجدولة المحتوى باحترافية تامة لزيادة التفاعل والنمو.</p>
             </div>
             <div class="service-card">
                 <div class="speed-badge">تحدي الـ 4 ساعات</div>
@@ -780,18 +814,26 @@
                         <option value="" disabled selected>اختر الخدمة...</option>
                         <option value="برمجة وتطوير ويب">برمجة وتطوير ويب</option>
                         <option value="مونتاج فيديوهات">مونتاج فيديوهات (Shorts/Reels)</option>
+                        <option value="إدارة الصفحات والقنوات">إدارة الصفحات والقنوات</option>
                         <option value="تصميم لوجو احترافي">تصميم لوجو احترافي</option>
                         <option value="بوستر إعلاني">بوستر إعلاني</option>
                         <option value="صورة مصغرة (Thumbnail)">صورة مصغرة (Thumbnail)</option>
-                        <option value="إدارة الصفحات والقنوات">إدارة الصفحات والقنوات</option>
                     </select>
+                </div>
+                <div class="input-group">
+                    <label>إرفاق الصورة (اختياري)</label>
+                    <div class="file-upload-wrapper">
+                        <i class="fas fa-image"></i>
+                        <span id="file-name">إختر الصورة من جهازك...</span>
+                        <input type="file" id="clientFile" accept="image/*">
+                    </div>
                 </div>
                 <div class="input-group">
                     <label>تفاصيل المشروع</label>
                     <textarea id="projectDetails" rows="4" placeholder="اشرح لنا فكرتك أو طلبك بالتفصيل..." required></textarea>
                 </div>
                 <button type="submit" class="submit-order">
-                    <i class="fab fa-whatsapp"></i> ارسل الطلب
+                    ارسل الطلب <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
                 </button>
             </form>
         </div>
@@ -829,6 +871,12 @@
     </footer>
 
     <script>
+        // تحديث اسم الملف عند الاختيار
+        document.getElementById('clientFile').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : "إختر الصورة من جهازك...";
+            document.getElementById('file-name').innerText = fileName;
+        });
+
         // كود إرسال الواتساب المنظم مع التعديلات الجديدة
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -836,11 +884,14 @@
             const name = document.getElementById('clientName').value;
             const service = document.getElementById('serviceType').value;
             const details = document.getElementById('projectDetails').value;
-            const myNumber = "201112445685"; // رقم الواتساب الخاص بك
+            const fileInput = document.getElementById('clientFile');
+            const myNumber = "201112445685"; 
             
             let photoNote = "";
-            if(service.includes("صورة مصغرة")) {
-                photoNote = "%0A%0A📸 *ملاحظة:* يرجى إرسال الصورة المراد العمل عليها الآن.";
+            if(fileInput.files.length > 0) {
+                photoNote = "%0A%0A✅ *تم إرفاق صورة:* سأقوم بإرسالها لك الآن بعد هذه الرسالة.";
+            } else if (service.includes("صورة") || service.includes("Thumbnail") || service.includes("لوجو")) {
+                photoNote = "%0A%0A📸 *تنبيه:* لم أرفق صورة، يرجى إخباري إذا كنت تحتاج لواحدة.";
             }
 
             const message = `*طلب خدمة جديد من Ab Maki Group*%0A%0A` +

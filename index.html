@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اب مكي جروب</title>
+    <title>اب مكي جروب | إمبراطورية الإنتاج الرقمي</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#e60000">
@@ -63,11 +63,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 999999; /* رفعت الـ z-index للتأكد من التغطية */
+            z-index: 999999; 
             transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
         }
 
-        /* لوجو التحميل مع أنيميشن أكثر نعومة وفخامة */
         .loader-logo {
             width: 100px;
             filter: drop-shadow(0 0 15px var(--accent-glow));
@@ -75,7 +74,6 @@
             margin-bottom: 30px;
         }
 
-        /* شريط التحميل "الذكي" */
         .loader-bar {
             width: 180px;
             height: 3px;
@@ -85,7 +83,6 @@
             position: relative;
         }
 
-        /* حركة المسح الضوئي للشريط (Scanner Effect) */
         .loader-bar::after {
             content: '';
             position: absolute;
@@ -107,12 +104,10 @@
             100% { left: 100%; }
         }
 
-        /* تلاشي المحتوى أثناء التحميل لمنع الوميض */
         body.loading {
             overflow: hidden;
         }
 
-        /* باقي الأكواد كما هي تماماً */
         header {
             background: #ffffff;
             padding: 5px 8%; 
@@ -420,7 +415,7 @@
             font-weight: bold;
         }
 
-        .discount-badge { background: #ffcc00; color: #000; }
+        .discount-badge { background: #ffcc00 !important; color: #000 !important; }
 
         .service-card i {
             font-size: 3.5rem;
@@ -752,7 +747,8 @@
         }
     </style>
 </head>
-<body class="loading"> <div id="loader">
+<body class="loading"> 
+    <div id="loader">
         <img src="https://i.ibb.co/9HvXFf6L/1000052597.png" alt="Ab Maki Loading" class="loader-logo">
         <div class="loader-bar"></div>
     </div>
@@ -795,7 +791,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>اب مـــكــي <span style="color: var(--main-red);">جــروب</span></h1>
-            <p>من البرمجة المعقدة إلى المونتاج السينمائي، نحن نسلح علامتك التجارية بأقوى الأدوات البصرية والتقنية لتسيطر على مجالك بامتياز.</p>
+            <p>من البرمجة المعقدة إلى المونتاج السينمائي والتصاميم البصرية الفاخرة، نحن نسلح علامتك التجارية بأقوى الأدوات لتسيطر على مجالك بامتياز.</p>
             <a href="#request-service" class="btn">اطلب مشروعك الآن <i class="fas fa-rocket" style="margin-right: 10px;"></i></a>
         </div>
     </section>
@@ -810,16 +806,16 @@
                 <p>بناء منصات رقمية ذكية بأكواد نظيفة وأداء خارق يضمن لك التواجد القوي والمستدام.</p>
             </div>
             <div class="service-card">
-                <div class="speed-badge">شامل وسريع</div>
-                <i class="fas fa-tasks"></i>
-                <h3>إدارة الصفحات والقنوات</h3>
-                <p>تنمية حساباتك على السوشيال ميديا وجدولة المحتوى باحترافية تامة لزيادة التفاعل والنمو.</p>
+                <div class="speed-badge discount-badge">تسليم خلال ساعة | خصم 50%</div>
+                <i class="fas fa-paint-brush"></i>
+                <h3>الصور المصغرة والبوسترات</h3>
+                <p>تصاميم Thumbnails و Posters إعلانية تجذب العين وترفع نسب النقر والمشاهدة بشكل جنوني، جاهزة في ساعة واحدة فقط!</p>
             </div>
             <div class="service-card">
                 <div class="speed-badge">تحدي الـ 4 ساعات</div>
                 <i class="fas fa-video"></i>
                 <h3>المونتاج (قصير & طويل)</h3>
-                <p>فيديوهات الـ Shorts و Reels جاهزة للنشر خلال 4 ساعات فقط، بجودة سينمائية مذهلة.</p>
+                <p>فيديوهات الـ Shorts و Reels جاهزة للنشر خلال 4 ساعات فقط، بجودة سينمائية مذهلة تضمن الانتشار.</p>
             </div>
         </div>
     </section>
@@ -830,33 +826,15 @@
         <div class="portfolio-wrapper">
             <button class="scroll-btn prev-btn" id="slidePrev"><i class="fas fa-chevron-right"></i></button>
             <div class="portfolio-grid" id="videoGrid">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/cg5iuHgFlZQ" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/Eh3L3ZgNghA" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/wl45_txz-cM" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/QGNLnR2VKN4" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/wosBEaiNbD0" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/WwfYuw_hHEs" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/epOrzbRR6Fg" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/Xkq--wJIFh0" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/c8VbMJeK-M0" allowfullscreen></iframe>
-                </div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/cg5iuHgFlZQ" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/Eh3L3ZgNghA" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/wl45_txz-cM" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/QGNLnR2VKN4" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/wosBEaiNbD0" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/WwfYuw_hHEs" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/epOrzbRR6Fg" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/Xkq--wJIFh0" allowfullscreen></iframe></div>
+                <div class="video-container"><iframe src="https://www.youtube.com/embed/c8VbMJeK-M0" allowfullscreen></iframe></div>
             </div>
             <button class="scroll-btn next-btn" id="slideNext"><i class="fas fa-chevron-left"></i></button>
         </div>
@@ -880,8 +858,8 @@
                         <option value="مونتاج فيديوهات">مونتاج فيديوهات (Shorts/Reels)</option>
                         <option value="إدارة الصفحات والقنوات">إدارة الصفحات والقنوات</option>
                         <option value="تصميم لوجو احترافي">تصميم لوجو احترافي</option>
-                        <option value="بوستر إعلاني">بوستر إعلاني</option>
-                        <option value="صورة مصغرة (Thumbnail)">صورة مصغرة (Thumbnail)</option>
+                        <option value="بوستر إعلاني">بوستر إعلاني (خصم 50% - تسليم ساعة)</option>
+                        <option value="صورة مصغرة (Thumbnail)">صورة مصغرة (Thumbnail) (خصم 50% - تسليم ساعة)</option>
                     </select>
                 </div>
                 <div class="input-group image-upload-section" id="uploadGroup">
@@ -894,7 +872,7 @@
                 </div>
                 <div class="input-group">
                     <label>تفاصيل المشروع</label>
-                    <textarea id="projectDetails" rows="4" placeholder="اشرح لنا فكرتك أو طلبك بالتفصيل..." required></textarea>
+                    <textarea id="projectDetails" rows="4" placeholder="اشرح لنا فكرتك أو طلبك بالتفصيل... (يُطبق خصم الـ 50% تلقائياً عند التأخير عن ساعة)" required></textarea>
                 </div>
                 <button type="submit" class="submit-order" id="submitBtn">
                     ارسل الطلب <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
@@ -935,10 +913,8 @@
     </footer>
 
     <script>
-        // كود شاشة التحميل "الذكي": يختفي فور تحميل الصفحة لضمان السرعة
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            // تأخير بسيط جداً (400ms) لإعطاء انطباع احترافي بالهوية البصرية
             setTimeout(() => {
                 loader.style.opacity = '0';
                 document.body.classList.remove('loading');
@@ -948,14 +924,13 @@
             }, 400); 
         });
 
-        // باقي منطق الجافا سكريبت كما هو تماماً لضمان عمل الواتساب والرفع
         const serviceType = document.getElementById('serviceType');
         const uploadGroup = document.getElementById('uploadGroup');
 
         serviceType.addEventListener('change', function() {
             const selected = this.value;
-            const designOptions = ["تصميم لوجو احترافي", "بوستر إعلاني", "صورة مصغرة (Thumbnail)"];
-            if (designOptions.includes(selected)) {
+            const designOptions = ["تصميم لوجو احترافي", "بوستر إعلاني (خصم 50% - تسليم ساعة)", "صورة مصغرة (Thumbnail) (خصم 50% - تسليم ساعة)"];
+            if (designOptions.some(opt => selected.includes(opt.split(' (')[0]))) {
                 uploadGroup.style.display = 'block';
             } else {
                 uploadGroup.style.display = 'none';
@@ -1000,14 +975,11 @@
             const details = document.getElementById('projectDetails').value;
             const myNumber = "201112445685"; 
             let photoNote = uploadedImageUrl !== "" ? `%0A%0A🔗 *رابط الصورة المرفقة:*%0A${uploadedImageUrl}` : "";
-            const message = `*طلب خدمة جديد من Ab Maki Group*%0A%0A👤 *الاسم:* ${name}%0A🛠 *الخدمة:* ${service}%0A📝 *التفاصيل:* ${details}${photoNote}`;
+            const message = `*طلب خدمة جديد من Ab Maki Group*%0A%0A👤 *الاسم:* ${name}%0A🛠 *الخدمة:* ${service}%0A📝 *التفاصيل:* ${details}${photoNote}%0A%0A⚠️ *ملاحظة:* يُطبق الخصم 50% في حال التأخر عن ساعة للتصاميم.`;
             window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
         });
 
-        // باقي الأكواد الوظيفية (PWA, Slider, Menu)
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
-            caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
             });
@@ -1034,7 +1006,7 @@
                 const { outcome } = await deferredPrompt.userChoice;
                 if (outcome === 'accepted') installBanner.classList.remove('show');
                 deferredPrompt = null;
-            } else { alert("ثبته من إعدادات المتصفح أو زر المشاركة في الآيفون."); }
+            }
         };
 
         document.getElementById('installBtn').addEventListener('click', executeInstall);
@@ -1052,13 +1024,6 @@
             navLinks.classList.toggle('active');
             icon.classList.toggle('fa-times');
             icon.classList.toggle('fa-bars');
-        });
-        document.querySelectorAll('.nav-links li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            });
         });
     </script>
 </body>

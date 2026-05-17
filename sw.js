@@ -35,24 +35,26 @@ self.addEventListener('activate', event => {
       );
     })
   );
+  // السيطرة على العميل فوراً بمجرد التفعيل
+  self.clients.claim();
   console.log('Ab Maki: السيرفس وركر جاهز للسيطرة على النظام!');
 });
 
-// 3. استراتيجية جلب البيانات (Fetch): الكاش أولاً، ثم الشبكة
-// هذه الاستراتيجية تجعل الموقع يفتح بسرعة البرق في المرات القادمة
+// 3. استراتيجية جلب البيانات (Network First): الشبكة أولاً ثم الكاش
+// هذه الطريقة تضمن حذف الكاش القديم واستبداله بالجديد عند كل ريفريش
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      // إذا كان الملف موجوداً في الكاش، قم بإرجاعه
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      // إذا لم يكن موجوداً، قم بجلبه من الإنترنت
-      return fetch(event.request).then(networkResponse => {
-        return networkResponse;
-      });
-    }).catch(() => {
-      // يمكنك هنا إرجاع صفحة "أنت غير متصل بالإنترنت" إذا أردت مستقبلاً
-    })
+    fetch(event.request)
+      .then(networkResponse => {
+        // إذا نجح جلب الملف من الشبكة، قم بتخزين نسخة محدثة في الكاش
+        return caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // في حال فشل الشبكة (أوفلاين)، استخدم الكاش
+        return caches.match(event.request);
+      })
   );
 });

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اب مكي جروب | إمبراطورية الإنتاج الرقمي</title>
+    <title>اب مكي جروب</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#e60000">
@@ -791,7 +791,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>اب مـــكــي <span style="color: var(--main-red);">جــروب</span></h1>
-            <p>من البرمجة المعقدة إلى المونتاج السينمائي والتصاميم البصرية الفاخرة، نحن نسلح علامتك التجارية بأقوى الأدوات لتسيطر على مجالك بامتياز.</p>
+            <p>من البرمجة المعقدة إلى المونتاج السينمائي، إدارة القنوات، والتصاميم البصرية الفاخرة، نحن نسلح علامتك التجارية بأقوى الأدوات لتسيطر على مجالك بامتياز.</p>
             <a href="#request-service" class="btn">اطلب مشروعك الآن <i class="fas fa-rocket" style="margin-right: 10px;"></i></a>
         </div>
     </section>
@@ -809,7 +809,13 @@
                 <div class="speed-badge discount-badge">تسليم خلال ساعة | خصم 50%</div>
                 <i class="fas fa-paint-brush"></i>
                 <h3>الصور المصغرة والبوسترات</h3>
-                <p>تصاميم Thumbnails و Posters إعلانية تجذب العين وترفع نسب النقر والمشاهدة بشكل جنوني، جاهزة في ساعة واحدة فقط!</p>
+                <p>تصاميم Thumbnails و Posters تجذب العين. **خصم 50% في حال التأخير عن ساعة واحدة فقط!**</p>
+            </div>
+            <div class="service-card">
+                <div class="speed-badge">إدارة شاملة</div>
+                <i class="fas fa-tasks"></i>
+                <h3>إدارة الصفحات والقنوات</h3>
+                <p>نتولى عنك عناء إدارة محتواك على كافة المنصات لضمان التفاعل المستمر والنمو الحقيقي لجمهورك.</p>
             </div>
             <div class="service-card">
                 <div class="speed-badge">تحدي الـ 4 ساعات</div>
@@ -859,7 +865,7 @@
                         <option value="إدارة الصفحات والقنوات">إدارة الصفحات والقنوات</option>
                         <option value="تصميم لوجو احترافي">تصميم لوجو احترافي</option>
                         <option value="بوستر إعلاني">بوستر إعلاني (خصم 50% - تسليم ساعة)</option>
-                        <option value="صورة مصغرة (Thumbnail)">صورة مصغرة (Thumbnail) (خصم 50% - تسليم ساعة)</option>
+                        <option value="صورة مصغرة (Thumbnail)">صورة مصغرة (Thumbnail) (خصم 50% للتأخير)</option>
                     </select>
                 </div>
                 <div class="input-group image-upload-section" id="uploadGroup">
@@ -872,7 +878,7 @@
                 </div>
                 <div class="input-group">
                     <label>تفاصيل المشروع</label>
-                    <textarea id="projectDetails" rows="4" placeholder="اشرح لنا فكرتك أو طلبك بالتفصيل... (يُطبق خصم الـ 50% تلقائياً عند التأخير عن ساعة)" required></textarea>
+                    <textarea id="projectDetails" rows="4" placeholder="اشرح لنا فكرتك أو طلبك بالتفصيل... (يُطبق خصم الـ 50% تلقائياً عند التأخير عن ساعة في الصور المصغرة)" required></textarea>
                 </div>
                 <button type="submit" class="submit-order" id="submitBtn">
                     ارسل الطلب <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
@@ -929,7 +935,7 @@
 
         serviceType.addEventListener('change', function() {
             const selected = this.value;
-            const designOptions = ["تصميم لوجو احترافي", "بوستر إعلاني (خصم 50% - تسليم ساعة)", "صورة مصغرة (Thumbnail) (خصم 50% - تسليم ساعة)"];
+            const designOptions = ["تصميم لوجو احترافي", "بوستر إعلاني (خصم 50% - تسليم ساعة)", "صورة مصغرة (Thumbnail) (خصم 50% للتأخير)"];
             if (designOptions.some(opt => selected.includes(opt.split(' (')[0]))) {
                 uploadGroup.style.display = 'block';
             } else {
@@ -975,7 +981,7 @@
             const details = document.getElementById('projectDetails').value;
             const myNumber = "201112445685"; 
             let photoNote = uploadedImageUrl !== "" ? `%0A%0A🔗 *رابط الصورة المرفقة:*%0A${uploadedImageUrl}` : "";
-            const message = `*طلب خدمة جديد من Ab Maki Group*%0A%0A👤 *الاسم:* ${name}%0A🛠 *الخدمة:* ${service}%0A📝 *التفاصيل:* ${details}${photoNote}%0A%0A⚠️ *ملاحظة:* يُطبق الخصم 50% في حال التأخر عن ساعة للتصاميم.`;
+            const message = `*طلب خدمة جديد من Ab Maki Group*%0A%0A👤 *الاسم:* ${name}%0A🛠 *الخدمة:* ${service}%0A📝 *التفاصيل:* ${details}${photoNote}%0A%0A⚠️ *ملاحظة:* يُطبق الخصم 50% في حال التأخر عن ساعة في الصور المصغرة.`;
             window.open(`https://wa.me/${myNumber}?text=${message}`, '_blank');
         });
 
